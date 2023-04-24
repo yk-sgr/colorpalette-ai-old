@@ -39,7 +39,7 @@ export default function RootLayout({children}: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
       <head/>
       <ClientProviders>
-        <PlausibleProvider domain={process.env.NEXT_PUBLIC_DOMAIN as string}>
+        <PlausibleProvider domain={process.env.NEXT_PUBLIC_DOMAIN as string} selfHosted={true} customDomain={"plausible.c.colorpalette-ai.com"} trackOutboundLinks={true}>
           <body
             className={cn(
               "min-h-screen bg-background font-sans antialiased",
