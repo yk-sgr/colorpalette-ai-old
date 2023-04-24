@@ -1,7 +1,9 @@
-/** @type {import('prettier').Config} */
-module.exports = {
+/** @type {import("prettier").Config} */
+/** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
+
+const config = {
   endOfLine: "lf",
-  semi: false,
+  semi: true,
   singleQuote: false,
   tabWidth: 2,
   trailingComma: "es5",
@@ -11,15 +13,11 @@ module.exports = {
     "<THIRD_PARTY_MODULES>",
     "",
     "^types$",
-    "^@/types/(.*)$",
+    "^@local/(.*)$",
     "^@/config/(.*)$",
     "^@/lib/(.*)$",
-    "^@/hooks/(.*)$",
-    "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
-    "^@/app/(.*)$",
-    "",
     "^[./]",
   ],
   importOrderSeparation: false,
@@ -28,5 +26,10 @@ module.exports = {
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderMergeDuplicateImports: true,
   importOrderCombineTypeAndValueImports: true,
-  plugins: ["@ianvs/prettier-plugin-sort-imports"],
-}
+  plugins: [
+    "prettier-plugin-tailwindcss",
+    "@ianvs/prettier-plugin-sort-imports",
+  ],
+};
+
+module.exports = config;

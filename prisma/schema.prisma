@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Palette {
+  id                 String   @id @default(cuid())
+  userId             String
+  colors             Color[]
+  name               String?
+  productDescription String   @db.Text()
+  createdAt          DateTime @default(now())
+}
+
+model Color {
+  id          String   @id @default(cuid())
+  hex         String
+  name        String
+  explanation String   @db.Text()
+  usage       String   @db.Text()
+  Palette     Palette? @relation(fields: [paletteId], references: [id])
+  paletteId   String?
+
+  @@index([paletteId])
+}

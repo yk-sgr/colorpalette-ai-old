@@ -1,26 +1,29 @@
-import * as React from "react"
 import Link from "next/link"
 
 import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
+import { siteConfig } from "@/config/site";
 
-interface MainNavProps {
-  items?: NavItem[]
-}
+const items = [
+  {
+    title: "Home",
+    href: "/",
+  }
+] as NavItem[];
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav() {
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <Icons.logo className="h-6 w-6" />
-        <span className="hidden font-bold sm:inline-block">
+      <span className="hidden font-bold sm:inline-block">
+        <span className="h-6 w-6">
+          🎨
+        </span>
+        <span>
           {siteConfig.name}
         </span>
-      </Link>
+      </span>
       {items?.length ? (
-        <nav className="hidden gap-6 md:flex">
+        <nav className="gap-6 md:flex">
           {items?.map(
             (item, index) =>
               item.href && (
