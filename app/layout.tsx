@@ -11,6 +11,8 @@ import {ClerkProvider} from "@clerk/nextjs/app-beta";
 import React, {PropsWithChildren} from 'react';
 import {ClientProviders} from '@/app/client-provider';
 import SiteFooter from '@/components/site-footer';
+import PlausibleProvider from 'next-plausible';
+import * as process from 'process';
 
 export const metadata: Metadata = {
   title: {
@@ -37,21 +39,23 @@ export default function RootLayout({children}: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
       <head/>
       <ClientProviders>
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader/>
-            <div className="mt-8 flex-1">{children}</div>
-            <SiteFooter />
-          </div>
-          <TailwindIndicator/>
-        </ThemeProvider>
-        </body>
+        <PlausibleProvider domain={process.env.NEXT_PUBLIC_DOMAIN as string}>
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable
+            )}
+          >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader/>
+              <div className="mt-8 flex-1">{children}</div>
+              <SiteFooter />
+            </div>
+            <TailwindIndicator/>
+          </ThemeProvider>
+          </body>
+        </PlausibleProvider>
       </ClientProviders>
       </html>
     </>
