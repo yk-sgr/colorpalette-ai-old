@@ -2,7 +2,7 @@ import { SignIn } from "@clerk/nextjs/app-beta";
 
 export default function Page() {
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <SignIn signUpUrl="/sign-up" />
     </div>
   );
