@@ -38,7 +38,7 @@ export default function RootLayout({children}: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider domain={process.env.NEXT_PUBLIC_DOMAIN as string} selfHosted={true} trackOutboundLinks={true} />
+        <script defer data-domain="colorpalette-ai.com" src="http://plausible.c.colorpalette-ai.com/js/script.js"></script>
       </head>
       <ClientProviders>
           <body
