@@ -39,6 +39,12 @@ export default function RootLayout({children}: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
       <head>
         <script defer data-domain="colorpalette-ai.com" src="https://analytics.colorpalette-ai.com/js/script.js"></script>
+        {/*<script
+          type="text/javascript"
+          src="https://app.termly.io/embed.min.js"
+          data-auto-block="on"
+          data-website-uuid="87ba0d72-cf08-4d12-b3a6-5dccade79cfa"
+        ></script>*/}
       </head>
       <ClientProviders>
           <body

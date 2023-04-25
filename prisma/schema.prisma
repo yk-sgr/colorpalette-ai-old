@@ -11,32 +11,26 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Palette {
-  id        String   @id @default(cuid())
-  userId    String
-  name      String?
-  prompt    String   @db.Text()
-  colors    Color[]
-  createdAt DateTime @default(now())
+enum Plan {
+  NONE
+  PAID_1
 }
 
-model Color {
-  id          String  @id @default(cuid())
-  hex         String
-  name        String
-  description String  @db.Text()
-  locked      Boolean @default(false)
-  usages      Usage[]
-  Palette     Palette @relation(fields: [paletteId], references: [id])
-  paletteId   String
+model User {
+  id          String   @id
+  plan        Plan     @default(NONE)
+  invocations Int      @default(0)
+  createdAt   DateTime @default(now())
 
-  @@index([paletteId])
+  @@map("users")
 }
 
-model Usage {
-  id      String @id @default(cuid())
-  Color   Color  @relation(fields: [colorId], references: [id])
-  colorId String
+model InvocationMetric {
+  id           String   @id @default(cuid())
+  time         BigInt
+  promptLength Int
+  inputLength  Int
+  date         DateTime @default(now())
 
-  @@index([colorId])
+  @@map("invocation_metrics")
 }

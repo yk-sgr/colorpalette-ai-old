@@ -8,7 +8,7 @@ export default function SiteFooter() {
         <a className="text-sm sm:text-center">© 2023 ColorPaletteAI.</a>
         <ul className="mt-3 flex flex-wrap items-center text-sm font-medium sm:mt-0">
           <li>
-            <Link href={"/pricing"}>
+            {/*<Link href={"/pricing"}>
               <Button variant={"ghost"}>Pricing</Button>
             </Link>
             <Link href={"/support"}>
@@ -19,7 +19,7 @@ export default function SiteFooter() {
             </Link>
             <Link href={"/imprint"}>
               <Button variant={"ghost"}>Imprint</Button>
-            </Link>
+            </Link>*/}
           </li>
         </ul>
       </div>
