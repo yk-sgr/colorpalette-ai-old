@@ -1,10 +1,12 @@
 export type Palette = {
-  colors: Color[],
+  light: Color[],
+  dark: Color[],
 }
 
 export type Color = {
   name: string;
-  hex: string;
+  foreground: string;
+  background: string;
   description: string;
   usage: string[];
 }

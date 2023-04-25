@@ -8,10 +8,11 @@ import {Palette} from '@/lib/types';
 
 const promptExample: Palette =
   {
-    colors: [
+    light: [
       {
-        name: "Example",
-        hex: "#ffffff",
+        name: "Example Light Mode Color",
+        foreground: "the hex code of the foreground colors",
+        background: "the hex code of the background color",
         description: "The description of the color. Why did you choose it for this website? What does it convey?",
         usage: [
           "Where the color can be used: for example",
@@ -21,7 +22,8 @@ const promptExample: Palette =
       },
       {
         name: "Primary",
-        hex: "#4287f5",
+        background: "#4287f5",
+        foreground: "#000000",
         description: "This is the primary color of your application. It conveys calmness, tranquility, and stability.",
         usage: [
           "Navigation Bar",
@@ -29,52 +31,47 @@ const promptExample: Palette =
           "Links"
         ]
       },
+    ],
+    dark: [
       {
-        name: "Secondary",
-        hex: "#3bebaa",
-        description: "This is the secondary color of your application.",
+        name: "Example Dark Mode Color",
+        foreground: "the hex code of the foreground colors",
+        background: "the hex code of the background color",
+        description: "The description of the color. Why did you choose it for this website? What does it convey?",
         usage: [
-          "Secondary Buttons",
-          "Accent Elements",
-          "Highlighting",
-          "Hover and active states"
-        ]
-      },
-      {
-        name: "Error",
-        hex: "#eb443b",
-        description: "The error color for your website.",
-        usage: [
-          "Error messages and destructive buttons",
-        ]
-      },
-      {
-        name: "Light Shade",
-        hex: "#d9d7d7",
-        description: "A light shade that does xxx",
-        usage: [
-          "component x y",
+          "Where the color can be used: for example",
+          "Buttons",
+          "Navbar etc.."
         ]
       }
     ]
   };
 
 const prompt = `
-You are ColorPaletteAI. Your sole and only purpose is to generate color palettes from a website description.
-You have to think like a designer.
-You are going to generate colors that fit best to the product.
-The colors must match together. We don't like ugly websites.
-You HAVE to respond in JSON format. If you do not respond in JSON format, the response can not be accepted.
-You must not add any additional text to the response, except the one and only JSON object.
-You are going to add at least the following colors:
-- Primary
-- Secondary
-- Background Color
-- Light Shade
-- Dark Shade
-- Error Color
+You are ColorPaletteAI, an AI expert in generating color palettes for websites based on website descriptions.
+As a designer, create color palettes that complement each other and result in visually appealing websites.
 
-The JSON response must look like the following:
+Factor in the 2023 web design color trends and color psychology as you generate color palettes:
+  - Bold, eye-catching colors like purple, fuchsia, red, yellow, and blue.
+  - Metallics and silver chrome for glamour and luxury.
+  - Soft, understated hues (Millennial Kitsch) like lavender, soft pink, mint, and blush.
+  - Warm Mediterranean hues, including terra cottas, dusky reds and oranges, and tones of clay and ceramic pottery.
+  - Modern monochrome color schemes with pops of dynamic colors.
+  - Nature-inspired neutrals and pastels like soft creams, botanical greens, and pale pinks.
+  - Dual-tone color schemes with abrupt changes for a striking effect.
+
+IMPORTANT: Respond with a JSON object ONLY. If the website description is unclear or invalid, return an empty JSON response: {}.
+
+Generate at least the following colors:
+  - Primary
+  - Secondary
+  - Background Color
+  - Light Shade
+  - Dark Shade
+  - Error Color
+
+Provide an RFC8259 compliant JSON response in this format:
+
 ${JSON.stringify(promptExample)}
 `;
 
@@ -105,23 +102,23 @@ export const palettesRouter = createTRPCRouter({
       ) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "There was an error. Please try again."
+          message: "There was an error. Please try a different, more precise description."
         });
       }
 
       console.log(completion.data.choices[0].message.content);
 
       try {
-        const palette = JSON.parse(completion.data.choices[0].message.content) as Palette;
+        const palette = JSON.parse(completion.data.choices[0].message.content.replaceAll("]}.", "]}")) as Palette;
         return {
           palette,
         };
 
-      // JSON parse error
+        // JSON parse error
       } catch (_) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "There was an error. Please try again."
+          message: "There was an error. Please try a different, more precise description."
         });
       }
     }),

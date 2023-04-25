@@ -38,7 +38,7 @@ export default function RootLayout({children}: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
       <head>
-        <script defer data-domain="colorpalette-ai.com" src="https://plausible.c.colorpalette-ai.com/js/script.js"></script>
+        <script defer data-domain="colorpalette-ai.com" src="https://analytics.colorpalette-ai.com/js/script.js"></script>
       </head>
       <ClientProviders>
           <body

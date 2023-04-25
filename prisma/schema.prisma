@@ -12,22 +12,31 @@ datasource db {
 }
 
 model Palette {
-  id                 String   @id @default(cuid())
-  userId             String
-  colors             Color[]
-  name               String?
-  productDescription String   @db.Text()
-  createdAt          DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  name      String?
+  prompt    String   @db.Text()
+  colors    Color[]
+  createdAt DateTime @default(now())
 }
 
 model Color {
-  id          String   @id @default(cuid())
+  id          String  @id @default(cuid())
   hex         String
   name        String
-  explanation String   @db.Text()
-  usage       String   @db.Text()
-  Palette     Palette? @relation(fields: [paletteId], references: [id])
-  paletteId   String?
+  description String  @db.Text()
+  locked      Boolean @default(false)
+  usages      Usage[]
+  Palette     Palette @relation(fields: [paletteId], references: [id])
+  paletteId   String
 
   @@index([paletteId])
+}
+
+model Usage {
+  id      String @id @default(cuid())
+  Color   Color  @relation(fields: [colorId], references: [id])
+  colorId String
+
+  @@index([colorId])
 }

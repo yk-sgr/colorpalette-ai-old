@@ -7,12 +7,15 @@ import {ChevronsUpDown, Loader2} from 'lucide-react';
 import {api} from '@/lib/api/client';
 import {useState} from 'react';
 import Color from '@/components/app/color';
+import {Switch} from '@/components/ui/switch';
+import {Label} from '@/components/ui/label';
 
 export default function GenerateSection() {
   const {mutate, isLoading, isSuccess, data, error, isError} = api.palettes.generate.useMutation({
     retry: 0,
   });
   const [description, setDescription] = useState<string>("");
+  const [useDarkMode, setUseDarkMode] = useState<boolean>(false);
 
   function handleGenerate() {
     if (!isLoading)
@@ -45,15 +48,28 @@ export default function GenerateSection() {
             </p>
           )}
           {isError && (
-            <p className="leading-7 text-destructive-foreground">
-              There was an error. Please try again.
+            <p className="leading-7 text-destructive">
+              {error?.message}
             </p>
           )}
         </div>
       </section>
-      <section className={"container mt-8 flex items-center justify-center"}>
-        <div className={"grid grid-cols-3 gap-4"}>
-          {data && data.palette.colors.map(color => {
+      <section className={"container mt-8 flex flex-col items-center justify-center"}>
+        <div className={"w-full"}>
+          {data && (
+            <div className="flex items-center space-x-2">
+              <Switch id="dark-mode" onClick={() => setUseDarkMode(!useDarkMode)}/>
+              <Label htmlFor="dark-mode">Dark Mode</Label>
+            </div>
+          )}
+        </div>
+        <div className={"mt-4 grid grid-cols-3 gap-4"}>
+          {data && useDarkMode && data.palette.dark.map(color => {
+            return (
+              <Color color={color}/>
+            )
+          })}
+          {data && !useDarkMode && data.palette.light.map(color => {
             return (
               <Color color={color}/>
             )
