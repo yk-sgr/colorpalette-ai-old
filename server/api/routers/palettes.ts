@@ -108,6 +108,14 @@ export const palettesRouter = createTRPCRouter({
 
       try {
         const palette = JSON.parse(completion.data.choices[0].message.content.replaceAll("]}.", "]}")) as Palette;
+        await ctx.prisma.user.update({
+          where: {
+            id: ctx.auth.userId,
+          },
+          data: {
+            invocations: user.invocations + 1,
+          }
+        });
         return {
           palette,
         };
@@ -118,15 +126,6 @@ export const palettesRouter = createTRPCRouter({
           message: "There was an error. Please try a different, more precise description."
         });
       } finally {
-        await ctx.prisma.user.update({
-          where: {
-            id: ctx.auth.userId,
-          },
-          data: {
-            invocations: user.invocations + 1,
-          }
-        });
-
         await ctx.prisma.invocationMetric.create({
           data: {
             time: new Date().getTime() - start.getTime(),
