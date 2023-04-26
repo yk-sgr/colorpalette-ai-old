@@ -137,7 +137,10 @@ function Pricing() {
       price: 2.99,
       features: [
         "Unlimited color generations",
-        "Advanced generation options",
+        "* Advanced generation options",
+        "* Palette History",
+        "* Regenerate colors",
+        "* Edit palettes manually",
       ],
       redirect: "https://buy.stripe.com/aEUg0r6Jn1QV37OdQQ"
     },
@@ -196,6 +199,7 @@ function Pricing() {
             </div>
           ))
         }
+        <p className="text-muted-foreground text-sm">* Feature coming soon.</p>
       </div>
     </section>
   );
