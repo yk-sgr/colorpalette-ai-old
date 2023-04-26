@@ -35,7 +35,7 @@ function Header() {
 
 function Features() {
   const features = [
-    {
+    /*{
       icon:
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -82,8 +82,12 @@ function Features() {
         </svg>,
       title: "Flexible",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus."
-    },
-  ]
+    },*/
+  ] as {
+    icon: React.ReactNode;
+    title: string;
+    desc: string;
+  }[]
 
   return (
     <section className="container mt-20 grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -165,7 +169,7 @@ function Pricing() {
                   {item.name}
                 </span>
                 <div className="text-3xl font-semibold">
-                  ${item.price} <span className="text-xl font-normal">/mo</span>
+                  {item.price}€<span className="text-xl font-normal">/mo</span>
                 </div>
                 <p className="leading-7 [&:not(:first-child)]:mt-6">
                   {item.desc}
@@ -187,9 +191,9 @@ function Pricing() {
                         viewBox="0 0 20 20"
                         fill="currentColor">
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clip-rule="evenodd"></path>
+                          clipRule="evenodd"></path>
                       </svg>
                       {featureItem}
                     </li>
