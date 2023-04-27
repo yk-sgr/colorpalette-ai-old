@@ -4,7 +4,8 @@ import {OpenAIApi, Configuration} from "openai";
 import {TRPCError} from "@trpc/server";
 import {createTRPCRouter, publicProcedure} from '@/server/api/trpc';
 import * as process from 'process';
-import {Palette} from '@/lib/types';
+import {Color, Palette} from '@/lib/types';
+import {ColorType} from '@prisma/client';
 
 const promptExample: Palette = {
   "light": [
@@ -61,7 +62,7 @@ export const palettesRouter = createTRPCRouter({
     .input(z.object({description: z.string().max(300).min(1)}))
     .mutation(async ({ctx, input}) => {
       const start = new Date();
-      if (ctx.auth === null || ctx.auth?.user === null) {
+      if (ctx.auth === null || ctx.auth?.user === null || !ctx.auth?.userId) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
           message: "Please login first.",
@@ -84,6 +85,8 @@ export const palettesRouter = createTRPCRouter({
           message: "Out of invocations. Please upgrade your subscription."
         });
       }
+
+      console.log(prompt)
 
       const configuration = new Configuration({
         apiKey: process.env.OPENAI_API_KEY,
@@ -108,6 +111,19 @@ export const palettesRouter = createTRPCRouter({
 
       try {
         const palette = JSON.parse(completion.data.choices[0].message.content.replaceAll("]}.", "]}")) as Palette;
+        const colors: Color[] = [...palette.light.map((color) => {
+          return {
+            ...color,
+            type: ColorType.LIGHT,
+          }
+        }),
+          ...palette.dark.map((color) => {
+            return {
+              ...color,
+              type: ColorType.DARK,
+            }
+          }),
+        ];
         await ctx.prisma.user.update({
           where: {
             id: ctx.auth.userId,
@@ -116,11 +132,37 @@ export const palettesRouter = createTRPCRouter({
             invocations: user.invocations + 1,
           }
         });
+        await ctx.prisma.palette.create({
+          data: {
+            userId: ctx.auth.userId,
+            input: input.description,
+            name: new Date().toLocaleDateString(),
+            colors: {
+              create: colors.map((color) => {
+                return {
+                  name: color.name,
+                  background: color.background,
+                  foreground: color.foreground,
+                  description: color.description,
+                  type: color.type!,
+                  usages: {
+                    create: color.usage.map((usage) => {
+                      return {
+                        usage,
+                      }
+                    }),
+                  }
+                }
+              }),
+            },
+          }
+        });
         return {
           palette,
         };
         // JSON parse error
-      } catch (_) {
+      } catch (err) {
+        console.error(err);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "There was an error. Please try a different, more precise description."

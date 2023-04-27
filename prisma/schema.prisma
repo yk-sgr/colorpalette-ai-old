@@ -22,6 +22,7 @@ model User {
   subscribedAt DateTime?
   invocations  Int       @default(0)
   createdAt    DateTime  @default(now())
+  palettes     Palette[]
 
   @@map("users")
 }
@@ -34,4 +35,48 @@ model InvocationMetric {
   date         DateTime @default(now())
 
   @@map("invocation_metrics")
+}
+
+model Palette {
+  id        String   @id @default(cuid())
+  input     String
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  colors    Color[]
+
+  @@index([userId])
+  @@map("palettes")
+}
+
+enum ColorType {
+  LIGHT
+  DARK
+}
+
+model Color {
+  id          String       @id @default(cuid())
+  name        String
+  foreground  String
+  background  String
+  description String
+  type        ColorType
+  usages      ColorUsage[]
+  paletteId   String
+  palette     Palette      @relation(fields: [paletteId], references: [id])
+
+  @@index([paletteId])
+  @@map("colors")
+}
+
+model ColorUsage {
+  id        String   @id @default(cuid())
+  colorId   String
+  color     Color    @relation(fields: [colorId], references: [id])
+  usage     String
+  createdAt DateTime @default(now())
+
+  @@index([colorId])
+  @@map("color_usages")
 }

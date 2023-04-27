@@ -1,7 +1,10 @@
 export type Palette = {
+  input?: string,
   light: Color[],
   dark: Color[],
 }
+
+export type ColorType = "LIGHT" | "DARK";
 
 export type Color = {
   name: string;
@@ -9,4 +12,5 @@ export type Color = {
   background: string;
   description: string;
   usage: string[];
+  type?: ColorType;
 }
