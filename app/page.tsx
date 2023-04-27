@@ -16,7 +16,8 @@ function Header() {
       <section className="container grid gap-6 pb-8 pt-6 md:py-10">
         <div className="flex max-w-[980px] flex-col items-start gap-2">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-            Discover Your Perfect Color Palette with <span className={"bg-gradient-to-r from-indigo-500 to-primary bg-clip-text text-transparent"}>AI-Powered ColorPaletteAI.</span>
+            Discover Your Perfect Color Palette with <span
+            className={"bg-gradient-to-r from-indigo-500 to-primary bg-clip-text text-transparent"}>AI-Powered ColorPaletteAI.</span>
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
             Effortlessly convert your product descriptions into visually captivating color schemes with our AI-powered
@@ -66,12 +67,12 @@ function Pricing() {
   return (
     <section className='relative py-14'>
       <div className="absolute top-0 h-[521px] w-full bg-gradient-to-b from-primary/10 to-background"></div>
-      <div className="mx-auto max-w-screen-xl text-gray-600 sm:px-4 md:px-8">
+      <div className="mx-auto max-w-screen-xl sm:px-4 md:px-8">
         <div className='relative mx-auto max-w-xl space-y-3 px-4 sm:px-0 sm:text-center'>
           <h3 className="font-semibold text-primary">
             Pricing
           </h3>
-          <p className='text-3xl font-semibold text-muted-foreground sm:text-4xl'>
+          <p className='text-3xl font-semibold sm:text-4xl'>
             Affordable and Transparent Pricing
           </p>
           <div className='max-w-xl text-muted-foreground'>
@@ -90,19 +91,28 @@ function Pricing() {
                   <span className='font-medium text-primary'>
                       {item.name}
                   </span>
-                  <div className={`text-3xl font-semibold ${item.isMostPop ? "text-accent-foreground" : "text-accent-foreground"}`}>
+                  <div className={`text-3xl font-semibold text-accent-foreground`}>
                     ${item.price} <span className="text-xl font-normal">/mo</span>
                   </div>
                   <p className={"text-muted-foreground"}>
                     {item.desc}
                   </p>
-                  <Link href={item.redirect}>
-                    <Button className="mt-2 w-full" variant={item.price === 0 ? "outline" : "default"}>{item.buttonLabel}</Button>
-                  </Link>
+                  {item.redirect.startsWith("http") && (
+                    <Link href={item.redirect}>
+                      <Button className="mt-2 w-full"
+                              variant={item.price === 0 ? "outline" : "default"}>{item.buttonLabel}</Button>
+                    </Link>
+                  )}
+                  {!item.redirect.startsWith("http") && (
+                    <a href={item.redirect}>
+                      <Button className="mt-2 w-full"
+                              variant={item.price === 0 ? "outline" : "default"}>{item.buttonLabel}</Button>
+                    </a>
+                    )}
                 </div>
                 <ul className='space-y-3 p-4 py-8 md:p-8'>
-                  <li className="pb-2 font-medium text-gray-800">
-                    <p className={"text-muted-foreground"}>Features</p>
+                  <li className="pb-2 font-medium">
+                    <p className={""}>Features</p>
                   </li>
                   {
                     item.features.map((featureItem, idx) => (
