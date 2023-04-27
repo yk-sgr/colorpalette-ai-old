@@ -13,14 +13,15 @@ datasource db {
 
 enum Plan {
   NONE
-  PAID_1
+  PRO
 }
 
 model User {
-  id          String   @id
-  plan        Plan     @default(NONE)
-  invocations Int      @default(0)
-  createdAt   DateTime @default(now())
+  id           String    @id
+  plan         Plan      @default(NONE)
+  subscribedAt DateTime?
+  invocations  Int       @default(0)
+  createdAt    DateTime  @default(now())
 
   @@map("users")
 }

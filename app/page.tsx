@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import {env} from '@/env';
 
 export default function IndexPage() {
   return (
@@ -146,7 +147,7 @@ function Pricing() {
         "* Regenerate colors",
         "* Edit palettes manually",
       ],
-      redirect: "https://buy.stripe.com/aEUg0r6Jn1QV37OdQQ"
+      redirect: "/api/stripe/create-checkout-session",
     },
   ];
 
