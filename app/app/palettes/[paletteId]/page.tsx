@@ -21,7 +21,7 @@ export default async function PalettePage({params}: { params: { paletteId: strin
       <section className={"container mt-8 flex flex-col items-center justify-center"}>
         <div>
           <p className="text-lg font-semibold">Light mode colors</p>
-          <div className={"mt-4 grid grid-cols-3 gap-4"}>
+          <div className={"mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3"}>
             {data && data.light.map(color => {
               return (
                 <Color key={color.name + color.background + color.foreground} color={color}/>
@@ -30,7 +30,7 @@ export default async function PalettePage({params}: { params: { paletteId: strin
           </div>
           <div className={"mt-8"}>
             <p className="text-lg font-semibold">Dark mode colors</p>
-            <div className={"mt-4 grid grid-cols-3 gap-4"}>
+            <div className={"mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3"}>
               {data && data.dark.map(color => {
                 return (
                   <Color key={color.name + color.background + color.foreground} color={color}/>
