@@ -86,8 +86,8 @@ function Pricing() {
           {
             plans.map((item, idx) => (
               <div key={idx}
-                   className={`relative mt-6 flex flex-1 flex-col items-stretch sm:mt-0 sm:max-w-md rounded-lg ${item.isMostPop ? "bg-accent shadow-lg sm:border" : ""}`}>
-                <div className="space-y-4 border-b p-4 py-8 md:p-8">
+                   className={`relative mt-6 flex flex-1 flex-col items-stretch rounded-lg sm:mt-0 sm:max-w-md ${item.isMostPop ? "bg-accent shadow-lg sm:border" : ""}`}>
+                <div className={`space-y-4 border-b ${item.isMostPop ? "border-gray-300" : ""} p-4 py-8 md:p-8`}>
                   <span className="font-medium text-primary">
                       {item.name}
                   </span>
