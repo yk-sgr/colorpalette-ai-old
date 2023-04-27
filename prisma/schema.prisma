@@ -60,7 +60,7 @@ model Color {
   name        String
   foreground  String
   background  String
-  description String
+  description String       @db.Text()
   type        ColorType
   usages      ColorUsage[]
   paletteId   String
@@ -74,7 +74,7 @@ model ColorUsage {
   id        String   @id @default(cuid())
   colorId   String
   color     Color    @relation(fields: [colorId], references: [id])
-  usage     String
+  usage     String   @db.Text()
   createdAt DateTime @default(now())
 
   @@index([colorId])

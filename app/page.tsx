@@ -16,7 +16,7 @@ function Header() {
       <section className="container grid gap-6 pb-8 pt-6 md:py-10">
         <div className="flex max-w-[980px] flex-col items-start gap-2">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-            Discover Your Perfect Color Palette with <span className={"text-transparent bg-gradient-to-r from-indigo-500 to-primary bg-clip-text"}>AI-Powered ColorPaletteAI.</span>
+            Discover Your Perfect Color Palette with <span className={"bg-gradient-to-r from-indigo-500 to-primary bg-clip-text text-transparent"}>AI-Powered ColorPaletteAI.</span>
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
             Effortlessly convert your product descriptions into visually captivating color schemes with our AI-powered
@@ -71,10 +71,10 @@ function Pricing() {
           <h3 className="font-semibold text-primary">
             Pricing
           </h3>
-          <p className='text-3xl font-semibold text-gray-800 sm:text-4xl'>
+          <p className='text-3xl font-semibold text-muted-foreground sm:text-4xl'>
             Affordable and Transparent Pricing
           </p>
-          <div className='max-w-xl'>
+          <div className='max-w-xl text-muted-foreground'>
             <p>
               Our all-in-one plan caters to both personal and small business needs, offering the ideal balance of
               features and affordability.
@@ -85,15 +85,15 @@ function Pricing() {
           {
             plans.map((item, idx) => (
               <div key={idx}
-                   className={`relative mt-6 flex flex-1 flex-col items-stretch sm:mt-0 sm:max-w-md sm:rounded-lg ${item.isMostPop ? "bg-white shadow-lg sm:border" : ""}`}>
+                   className={`relative mt-6 flex flex-1 flex-col items-stretch sm:mt-0 sm:max-w-md sm:rounded-lg ${item.isMostPop ? "bg-white shadow-lg dark:bg-accent sm:border" : ""}`}>
                 <div className="space-y-4 border-b p-4 py-8 md:p-8">
                   <span className='font-medium text-primary'>
                       {item.name}
                   </span>
-                  <div className='text-3xl font-semibold text-gray-800'>
-                    ${item.price} <span className="text-xl font-normal text-gray-600">/mo</span>
+                  <div className={`text-3xl font-semibold ${item.isMostPop ? "text-accent-foreground" : "text-accent-foreground"}`}>
+                    ${item.price} <span className="text-xl font-normal">/mo</span>
                   </div>
-                  <p>
+                  <p className={"text-muted-foreground"}>
                     {item.desc}
                   </p>
                   <Link href={item.redirect}>
@@ -102,11 +102,11 @@ function Pricing() {
                 </div>
                 <ul className='space-y-3 p-4 py-8 md:p-8'>
                   <li className="pb-2 font-medium text-gray-800">
-                    <p>Features</p>
+                    <p className={"text-muted-foreground"}>Features</p>
                   </li>
                   {
                     item.features.map((featureItem, idx) => (
-                      <li key={idx} className='flex items-center gap-5'>
+                      <li key={idx} className='flex items-center gap-5 text-muted-foreground'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           className='h-5 w-5 text-primary'
