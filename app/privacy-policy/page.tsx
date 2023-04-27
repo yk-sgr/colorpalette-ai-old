@@ -1,7 +1,7 @@
 export default function PrivacyPolicyPage() {
   return (
     <div className={"container mx-auto"}>
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Privacy Policy</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Privacy Policy</h1>
       <p>Updated at 27.04.2023</p>
 
       <p> (“we,” “our,” or “us”) is committed to protecting your privacy. This Privacy Policy explains how your personal
@@ -12,10 +12,10 @@ export default function PrivacyPolicyPage() {
         our
         collection, storage, use, and disclosure of your personal information as described in this Privacy Policy and
         our
-        Terms of Service. This Privacy Policy was created with <a href="https://termify.io" target="_blank">Termify</a>.
+        Terms of Service. This Privacy Policy was created with <a href="https://termify.io" target="_blank" rel="noreferrer">Termify</a>.
       </p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Definitions and key terms</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Definitions and key terms</h1>
       <p>To help explain things as clearly as possible in this Privacy Policy, every time any of these terms are
         referenced,
         are strictly defined as:
@@ -56,11 +56,11 @@ export default function PrivacyPolicyPage() {
         <li>Third-party service:&nbsp;refers to advertisers, contest sponsors, promotional and marketing partners, and
           others who provide our content or whose products or services we think may interest you.
         </li>
-        <li>Website: 's site, which can be accessed via this URL:</li>
+        <li>Website: &apos;s site, which can be accessed via this URL:</li>
         <li>You: a person or entity that is registered with to use the Services.</li>
       </ul>
       <p></p>
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Information automatically collected</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Information automatically collected</h1>
       <p>There is some information like your Internet Protocol (IP) address and/or browser and device characteristics —
         is
         collected automatically when you visit our&nbsp;platform. This information may be used to connect your computer
@@ -104,16 +104,16 @@ export default function PrivacyPolicyPage() {
         provided
         that the third party agrees to adhere to the terms of this Privacy Policy.</p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Affiliates</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Affiliates</h1>
       <p>We may disclose information (including personal information) about you to our Corporate Affiliates. For
         purposes of
-        this Privacy Policy, "Corporate Affiliate" means any person or entity which directly or indirectly controls, is
+        this Privacy Policy, &quot;Corporate Affiliate&quot; means any person or entity which directly or indirectly controls, is
         controlled by or is under common control with , whether by ownership or otherwise. Any information relating to
         you
         that we provide to our Corporate Affiliates will be treated by those Corporate Affiliates in accordance with the
         terms of this Privacy Policy.</p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Governing Law</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Governing Law</h1>
       <p>This Privacy Policy is governed by the laws of without regard to its conflict of laws provision. You consent to
         the
         exclusive jurisdiction of the courts in connection with any action or dispute arising between the parties under
@@ -132,15 +132,15 @@ export default function PrivacyPolicyPage() {
         the
         use or disclosure of your personal information will mean that you accept those changes.</p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Your Consent</h1>
-      <p>We've updated our&nbsp;Privacy Policy&nbsp;to provide you with complete transparency into what is being set
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Your Consent</h1>
+      <p>We&apos;ve updated our&nbsp;Privacy Policy&nbsp;to provide you with complete transparency into what is being set
         when
-        you visit our site and how it's being used. By using our , registering an account, or making a purchase, you
+        you visit our site and how it&apos;s being used. By using our , registering an account, or making a purchase, you
         hereby
         consent to our Privacy Policy and agree to its terms.
       </p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Links to Other Websites</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Links to Other Websites</h1>
       <p>This Privacy Policy applies only to the Services. The Services may contain links to other websites not operated
         or
         controlled by . We are not responsible for the content, accuracy or opinions expressed in such websites, and
@@ -154,8 +154,8 @@ export default function PrivacyPolicyPage() {
         own rules and policies. Such third parties may use their own cookies or other methods to collect information
         about
         you.</p>
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Cookies</h1>
-      <p> uses "Cookies" to identify the areas of our website that you have visited. A Cookie is a small piece of data
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Cookies</h1>
+      <p> uses &quot;Cookies&quot; to identify the areas of our website that you have visited. A Cookie is a small piece of data
         stored on your computer or mobile device by your web browser. We use Cookies to enhance the performance and
         functionality of our but are non-essential to their use. However, without these cookies, certain functionality
         like
@@ -167,8 +167,8 @@ export default function PrivacyPolicyPage() {
         or at
         all. We never place Personally Identifiable Information in Cookies.</p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Blocking and disabling cookies and similar technologies</h1>
-      <p>Wherever you're located you may also set your browser to block cookies and similar technologies, but this
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Blocking and disabling cookies and similar technologies</h1>
+      <p>Wherever you&apos;re located you may also set your browser to block cookies and similar technologies, but this
         action
         may block our essential cookies and prevent our website from functioning properly, and you may not be able to
         fully
@@ -177,9 +177,9 @@ export default function PrivacyPolicyPage() {
         different
         controls available to you. Disabling a cookie or category of cookie does not delete the cookie from your
         browser,
-        you will need to do this yourself from within your browser, you should visit your browser's help menu for more
+        you will need to do this yourself from within your browser, you should visit your browser&apos;s help menu for more
         information.</p>
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Changes To Our Privacy Policy</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Changes To Our Privacy Policy</h1>
       <p>We may change our Service and policies, and we may need to make changes to this Privacy Policy so that they
         accurately reflect our Service and policies. Unless otherwise required by law, we will notify you (for example,
         through our Service) before we make changes to this Privacy Policy and give you an opportunity to review them
@@ -188,21 +188,21 @@ export default function PrivacyPolicyPage() {
         If
         you do not want to agree to this or any updated Privacy Policy, you can delete your account.</p>
 
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Third-Party Services</h1>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Third-Party Services</h1>
       <p>We may display, include or make available third-party content (including data, information, applications and
         other
-        products services) or provide links to third-party websites or services ("Third- Party Services").</p>
+        products services) or provide links to third-party websites or services (&quot;Third- Party Services&quot;).</p>
       <p>You acknowledge and agree that shall not be responsible for any Third-Party Services, including their accuracy,
         completeness, timeliness, validity, copyright compliance, legality, decency, quality or any other aspect
         thereof.
         does not assume and shall not have any liability or responsibility to you or any other person or entity for any
         Third-Party Services.</p>
       <p>Third-Party Services and links thereto are provided solely as a convenience to you and you access and use them
-        entirely at your own risk and subject to such third parties' terms and conditions.</p>
+        entirely at your own risk and subject to such third parties&apos; terms and conditions.</p>
       <ul>
       </ul>
-      <h1 className={"text-xl font-bold mt-2 mb-1"}>Contact Us</h1>
-      <p>Don't hesitate to contact us if you have any questions.</p>
+      <h1 className={"mb-1 mt-2 text-xl font-bold"}>Contact Us</h1>
+      <p>Don&apos;t hesitate to contact us if you have any questions.</p>
       <ul>
       </ul>
     </div>
