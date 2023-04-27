@@ -2,7 +2,7 @@ import {z} from "zod";
 import {OpenAIApi, Configuration} from "openai";
 
 import {TRPCError} from "@trpc/server";
-import {createTRPCRouter, publicProcedure} from '@/server/api/trpc';
+import {createTRPCRouter, protectedProcedure, publicProcedure} from '@/server/api/trpc';
 import * as process from 'process';
 import {Color, Palette} from '@/lib/types';
 import {ColorType} from '@prisma/client';
@@ -58,17 +58,100 @@ ${JSON.stringify(promptExample)}
 const PLAN_NONE_MAX = 3;
 
 export const palettesRouter = createTRPCRouter({
-  generate: publicProcedure
+  list: protectedProcedure.query(async ({ctx}) => {
+    const palettes = await ctx.prisma.palette.findMany({
+      where: {
+        userId: ctx.auth.userId,
+      },
+      include: {
+        colors: {
+          include: {
+            usages: true,
+          }
+        }
+      }
+    });
+
+    return palettes.map((palette) => {
+      return {
+        id: palette.id,
+        name: palette.name,
+        input: palette.input,
+        dark: palette.colors.filter((color) => color.type === ColorType.DARK).map((color) => {
+          return {
+            name: color.name,
+            background: color.background,
+            foreground: color.foreground,
+            description: color.description,
+            usage: color.usages.map((usage) => usage.usage),
+          }
+        }),
+        light: palette.colors.filter((color) => color.type === ColorType.LIGHT).map((color) => {
+          return {
+            name: color.name,
+            background: color.background,
+            foreground: color.foreground,
+            description: color.description,
+            usage: color.usages.map((usage) => usage.usage),
+          }
+        }),
+      }
+    }) as Palette[];
+  }),
+  byId: protectedProcedure.input(z.object({id: z.string()})).query(async ({ctx, input}) => {
+    const palette = await ctx.prisma.palette.findUnique({
+      where: {
+        id: input.id,
+      },
+      include: {
+        colors: {
+          include: {
+            usages: true,
+          }
+        }
+      }
+    });
+    if (!palette) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Palette not found."
+      });
+    }
+    if (palette.userId !== ctx.auth.userId) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You are not allowed to access this palette."
+      });
+    }
+
+    return {
+      id: palette.id,
+      name: palette.name,
+      input: palette.input,
+      dark: palette.colors.filter((color) => color.type === ColorType.DARK).map((color) => {
+        return {
+          name: color.name,
+          background: color.background,
+          foreground: color.foreground,
+          description: color.description,
+          usage: color.usages.map((usage) => usage.usage),
+        }
+      }),
+      light: palette.colors.filter((color) => color.type === ColorType.LIGHT).map((color) => {
+        return {
+          name: color.name,
+          background: color.background,
+          foreground: color.foreground,
+          description: color.description,
+          usage: color.usages.map((usage) => usage.usage),
+        }
+      }),
+    } as Palette;
+  }),
+  generate: protectedProcedure
     .input(z.object({description: z.string().max(300).min(1)}))
     .mutation(async ({ctx, input}) => {
       const start = new Date();
-      if (ctx.auth === null || ctx.auth?.user === null || !ctx.auth?.userId) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "Please login first.",
-        });
-      }
-
       const user = await ctx.prisma.user.upsert({
         where: {
           id: ctx.auth.userId,

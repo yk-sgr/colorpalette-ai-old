@@ -15,7 +15,6 @@ import type {
 import { createRecursiveProxy } from "@trpc/server/shared";
 
 import { getRequestStorage } from "./local-storage";
-import "server-only";
 
 interface CreateTRPCNextLayoutOptions<TRouter extends AnyRouter> {
   router: TRouter;

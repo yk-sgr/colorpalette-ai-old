@@ -24,11 +24,6 @@ export default function GenerateSection() {
 
   return (
     <>
-      <section className="container flex flex-col gap-2">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-          Your Palettes
-        </h2>
-      </section>
       <section className="container mt-8 flex flex-col gap-2">
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
           Generate new color palette.
@@ -66,12 +61,12 @@ export default function GenerateSection() {
         <div className={"mt-4 grid grid-cols-3 gap-4"}>
           {data && useDarkMode && data.palette.dark.map(color => {
             return (
-              <Color color={color}/>
+              <Color key={color.name + color.background + color.foreground} color={color}/>
             )
           })}
           {data && !useDarkMode && data.palette.light.map(color => {
             return (
-              <Color color={color}/>
+              <Color key={color.name + color.background + color.foreground} color={color}/>
             )
           })}
         </div>

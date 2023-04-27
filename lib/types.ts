@@ -1,5 +1,7 @@
 export type Palette = {
+  id?: string,
   input?: string,
+  name?: string;
   light: Color[],
   dark: Color[],
 }
