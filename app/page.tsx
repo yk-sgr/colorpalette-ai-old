@@ -25,7 +25,7 @@ function Header() {
           </p>
         </div>
         <Link href={"/app"}>
-          <Button className="w-full whitespace-nowrap md:w-fit" variant={"default"} size={"lg"}>Get started for
+          <Button className="md:w-fit w-full whitespace-nowrap" variant={"default"} size={"lg"}>Get started for
             free</Button>
         </Link>
       </section>
@@ -82,7 +82,7 @@ function Pricing() {
             </p>
           </div>
         </div>
-        <div className="mt-16 justify-center sm:flex container mx-auto">
+        <div className="container mx-auto mt-16 justify-center sm:flex">
           {
             plans.map((item, idx) => (
               <div key={idx}
