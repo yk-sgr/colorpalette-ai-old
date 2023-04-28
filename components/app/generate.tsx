@@ -6,7 +6,7 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from '@/components/
 import {ChevronsUpDown, Loader2} from 'lucide-react';
 import {api} from '@/lib/api/client';
 import {useState} from 'react';
-import SwitchableColors from '@/components/switchable-colors';
+import Colors from '../colors';
 
 export default function GenerateSection() {
   const ctx = api.useContext();
@@ -17,7 +17,6 @@ export default function GenerateSection() {
     }
   });
   const [description, setDescription] = useState<string>("");
-  const [useDarkMode, setUseDarkMode] = useState<boolean>(false);
 
   function handleGenerate() {
     if (!isLoading)
@@ -52,7 +51,7 @@ export default function GenerateSection() {
         </div>
       </section>
       <section className={"container mt-8 flex flex-col justify-center gap-8"}>
-        {data && <SwitchableColors lightColors={data.palette.light} darkColors={data.palette.dark} showAddColor={true} />}
+        {data && <Colors colors={data.palette.colors} showAddColor={true} />}
       </section>
     </>
   )

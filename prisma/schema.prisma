@@ -38,30 +38,24 @@ model InvocationMetric {
 }
 
 model Palette {
-  id        String   @id @default(cuid())
-  input     String
-  name      String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  colors    Color[]
+  id          String   @id @default(cuid())
+  description String?  @db.Text()
+  input       String
+  name        String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  colors      Color[]
 
   @@index([userId])
   @@map("palettes")
 }
 
-enum ColorType {
-  LIGHT
-  DARK
-}
-
 model Color {
   id          String       @id @default(cuid())
   name        String
-  foreground  String
-  background  String
+  hex         String
   description String       @db.Text()
-  type        ColorType
   usages      ColorUsage[]
   paletteId   String
   palette     Palette      @relation(fields: [paletteId], references: [id])

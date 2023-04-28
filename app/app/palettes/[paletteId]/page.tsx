@@ -1,27 +1,31 @@
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
 import {api} from '@/lib/api/server';
-import SwitchableColors from '@/components/switchable-colors';
+import Colors from '@/components/colors';
 
 export default async function PalettePage({params}: { params: { paletteId: string } }) {
   const data = await api.palettes.byId.fetch({id: params.paletteId});
 
   return (
     <div className={"flex flex-col gap-8"}>
-      <section className="container flex flex-col gap-2">
-        <div className={"flex justify-between border-b"}>
-          <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            {data.name}
-          </h2>
-          <Link href={`/app/palettes/${data.id}/edit`}>
-            <Button size={"sm"}>Edit</Button>
-          </Link>
-        </div>
-        <p className={"text-muted-foreground"}>{data.input}</p>
-      </section>
-      <section className={"container mt-8 flex flex-col"}>
-        <SwitchableColors lightColors={data.light} darkColors={data.dark} showAddColor={true} />
+      {data && <Header id={data.id} name={data.name} input={data.input}/>}
+      <section className={"container flex flex-col"}>
+        <Colors colors={data.colors} showAddColor={true}/>
       </section>
     </div>
+  )
+}
+
+function Header({id, name, input}: { id: string, name: string, input: string }) {
+  return (
+    <section className="container flex flex-col">
+      <h2 className={"text-2xl font-bold text-foreground/90"}>{name}</h2>
+      <div className={"flex items-end justify-between border-b pb-4"}>
+        <p className={"text-muted-foreground"}>{input}</p>
+        <Link href={`/app/palettes/${id}/edit`}>
+          <Button size={"default"} variant={"simple"}>Edit</Button>
+        </Link>
+      </div>
+    </section>
   )
 }

@@ -33,7 +33,7 @@ export function SiteHeader() {
 function StyledSignInButton() {
   return (
     <Link href={"/sign-in"}>
-      <Button>Sign In</Button>
+      <Button variant={"default"}>Sign In</Button>
     </Link>
   )
 }

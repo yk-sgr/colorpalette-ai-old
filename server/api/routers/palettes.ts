@@ -1,38 +1,24 @@
 import {z} from "zod";
-import {OpenAIApi, Configuration} from "openai";
+import {Configuration, OpenAIApi} from "openai";
 
 import {TRPCError} from "@trpc/server";
-import {createTRPCRouter, protectedProcedure, publicProcedure} from '@/server/api/trpc';
+import {createTRPCRouter, protectedProcedure} from '@/server/api/trpc';
 import * as process from 'process';
-import {Color, Palette} from '@/lib/types';
-import {ColorType} from '@prisma/client';
+import {GeneratePalette, Palette} from '@/lib/types';
 
-const promptExample: Palette = {
-  "light": [
+const promptExample: GeneratePalette = {
+  colors: [
     {
-      "name": "color name",
-      "background": "the hex code of the background color (main color)",
-      "foreground": "the hex code of the foreground colors (matching the background color)",
-      "description": "The description of the color. Why did you choose it for this website? What does it convey?",
-      "usage": [
-        "Where the color can be used: for example",
-        "Buttons",
-        "Navbar etc.."
+      name: "color name",
+      hex: "the hex code of the color",
+      description: "The description of the color. Why did you choose it for this website? What does it convey?",
+      usages: [
+        {
+          usage: "Where the color can be used: for example buttons, navbar, etc.",
+        },
       ]
     }
   ],
-  "dark": [
-    {
-      "name": "color name",
-      "background": "the hex code of the background color (main color)",
-      "foreground": "the hex code of the foreground colors (matching the background color)",
-      "description": "The description of the color. Why did you choose it for this website? What does it convey?",
-      "usage": [
-        "Where the color can be used: for example",
-        "Buttons", "Navbar etc.."
-      ]
-    }
-  ]
 }
 
 const prompt = `
@@ -47,8 +33,6 @@ Generate at least the following colors:
   - Dark Shade
   - Error Color
 
-Create the same colors for a light mode and dark mode on the website.
-
 IMPORTANT: Respond with a RFC8259 compliant JSON object ONLY. If the website description is unclear or invalid, return an empty JSON response: {}.
 Provide an RFC8259 compliant JSON response in this format:
 
@@ -59,7 +43,7 @@ const PLAN_NONE_MAX = 3;
 
 export const palettesRouter = createTRPCRouter({
   list: protectedProcedure.query(async ({ctx}) => {
-    const palettes = await ctx.prisma.palette.findMany({
+    return await ctx.prisma.palette.findMany({
       where: {
         userId: ctx.auth.userId,
       },
@@ -71,32 +55,6 @@ export const palettesRouter = createTRPCRouter({
         }
       }
     });
-
-    return palettes.map((palette) => {
-      return {
-        id: palette.id,
-        name: palette.name,
-        input: palette.input,
-        dark: palette.colors.filter((color) => color.type === ColorType.DARK).map((color) => {
-          return {
-            name: color.name,
-            background: color.background,
-            foreground: color.foreground,
-            description: color.description,
-            usage: color.usages.map((usage) => usage.usage),
-          }
-        }),
-        light: palette.colors.filter((color) => color.type === ColorType.LIGHT).map((color) => {
-          return {
-            name: color.name,
-            background: color.background,
-            foreground: color.foreground,
-            description: color.description,
-            usage: color.usages.map((usage) => usage.usage),
-          }
-        }),
-      }
-    }) as Palette[];
   }),
   byId: protectedProcedure.input(z.object({id: z.string()})).query(async ({ctx, input}) => {
     const palette = await ctx.prisma.palette.findUnique({
@@ -123,30 +81,34 @@ export const palettesRouter = createTRPCRouter({
         message: "You are not allowed to access this palette."
       });
     }
-
-    return {
-      id: palette.id,
-      name: palette.name,
-      input: palette.input,
-      dark: palette.colors.filter((color) => color.type === ColorType.DARK).map((color) => {
-        return {
-          name: color.name,
-          background: color.background,
-          foreground: color.foreground,
-          description: color.description,
-          usage: color.usages.map((usage) => usage.usage),
-        }
-      }),
-      light: palette.colors.filter((color) => color.type === ColorType.LIGHT).map((color) => {
-        return {
-          name: color.name,
-          background: color.background,
-          foreground: color.foreground,
-          description: color.description,
-          usage: color.usages.map((usage) => usage.usage),
-        }
-      }),
-    } as Palette;
+    return palette;
+  }),
+  delete: protectedProcedure.input(z.object({id: z.string()})).mutation(async ({ctx, input}) => {
+    const palette = await ctx.prisma.palette.findUnique({
+      where: {
+        id: input.id,
+      },
+      select: {
+        userId: true,
+      }
+    });
+    if (!palette) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Palette not found."
+      });
+    }
+    if (palette.userId !== ctx.auth.userId) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You are not allowed to access this palette."
+      });
+    }
+    await ctx.prisma.palette.delete({
+      where: {
+        id: input.id,
+      }
+    });
   }),
   generate: protectedProcedure
     .input(z.object({description: z.string().max(300).min(1)}))
@@ -188,25 +150,12 @@ export const palettesRouter = createTRPCRouter({
       ) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "There was an error. Please try a different, more precise description."
+          message: "Please try a different, more precise description."
         });
       }
 
       try {
-        const palette = JSON.parse(completion.data.choices[0].message.content.replaceAll("]}.", "]}")) as Palette;
-        const colors: Color[] = [...palette.light.map((color) => {
-          return {
-            ...color,
-            type: ColorType.LIGHT,
-          }
-        }),
-          ...palette.dark.map((color) => {
-            return {
-              ...color,
-              type: ColorType.DARK,
-            }
-          }),
-        ];
+        const palette = JSON.parse(completion.data.choices[0].message.content.replaceAll("]}.", "]}")) as GeneratePalette;
         await ctx.prisma.user.update({
           where: {
             id: ctx.auth.userId,
@@ -221,17 +170,15 @@ export const palettesRouter = createTRPCRouter({
             input: input.description,
             name: new Date().toLocaleDateString(),
             colors: {
-              create: colors.map((color) => {
+              create: palette.colors.map((color) => {
                 return {
                   name: color.name,
-                  background: color.background,
-                  foreground: color.foreground,
+                  hex: color.hex,
                   description: color.description,
-                  type: color.type!,
                   usages: {
-                    create: color.usage.map((usage) => {
+                    create: color.usages.map((usage) => {
                       return {
-                        usage,
+                        usage: usage.usage,
                       }
                     }),
                   }
@@ -248,7 +195,7 @@ export const palettesRouter = createTRPCRouter({
         console.error(err);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "There was an error. Please try a different, more precise description."
+          message: "There was an error. Please try again."
         });
       } finally {
         await ctx.prisma.invocationMetric.create({

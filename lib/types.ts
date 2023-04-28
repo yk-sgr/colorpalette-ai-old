@@ -1,18 +1,30 @@
-export type Palette = {
-  id?: string,
-  input?: string,
-  name?: string;
-  light: Color[],
-  dark: Color[],
+export type GeneratePalette = {
+  colors: GenerateColor[];
 }
 
-export type ColorType = "LIGHT" | "DARK";
+export type GenerateColor = {
+  name: string;
+  hex: string;
+  description: string;
+  usages: ColorUsage[];
+}
+
+export type Palette = {
+  id: string,
+  input: string,
+  description: string;
+  name: string;
+  colors: Color[],
+}
 
 export type Color = {
+  id: string;
   name: string;
-  foreground: string;
-  background: string;
+  hex: string;
   description: string;
-  usage: string[];
-  type?: ColorType;
+  usages: ColorUsage[];
+}
+
+export type ColorUsage = {
+  usage: string;
 }

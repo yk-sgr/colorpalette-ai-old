@@ -32,12 +32,6 @@ export default function RootLayout({children}: RootLayoutProps) {
       <head>
         <script defer data-domain="colorpalette-ai.com"
                 src="https://analytics.colorpalette-ai.com/js/script.js"></script>
-        {/*<script
-          type="text/javascript"
-          src="https://app.termly.io/embed.min.js"
-          data-auto-block="on"
-          data-website-uuid="87ba0d72-cf08-4d12-b3a6-5dccade79cfa"
-        ></script>*/}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>

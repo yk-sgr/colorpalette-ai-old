@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/95",
-        simple: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/80 dark:hover:bg-white/80",
+        simple: "bg-black text-white dark:bg-whiteh dark:text-black over:bg-accent/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -32,11 +32,11 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
       <button
@@ -47,6 +47,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
-Button.displayName = "Button"
+IconButton.displayName = "IconButton"
 
-export { Button, buttonVariants }
+export { IconButton, buttonVariants }

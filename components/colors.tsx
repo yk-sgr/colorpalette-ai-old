@@ -14,8 +14,7 @@ export default function Colors({colors, showAddColor}: { colors: ColorType[], sh
               className={"text-center text-lg font-semibold text-muted-foreground"}>Generate more</p>
           </div>
           <div
-            className={`flex h-60 cursor-pointer items-center justify-center rounded-xl border-2 border-muted-foreground/20 shadow-md transition duration-100 ease-out group-hover:border-muted-foreground/50 group-hover:transition group-hover:duration-75 group-hover:ease-in group-active:border-muted-foreground/80 group-active:duration-0`}
-            style={{boxShadow: `0 6px 8px -6px #fff`}}>
+            className={`flex h-60 cursor-pointer items-center justify-center rounded-xl border-2 border-foreground/20 transition duration-100 ease-out group-hover:border-foreground/50 group-hover:transition group-hover:duration-75 group-hover:ease-in group-active:border-foreground/80 group-active:duration-0`}>
             <PlusCircle strokeWidth={1} size={48}
                         className={"text-muted-foreground/40 transition duration-100 ease-out group-hover:text-muted-foreground/70 group-hover:transition group-hover:duration-75 group-hover:ease-in group-active:text-muted-foreground group-active:duration-0"}/>
           </div>

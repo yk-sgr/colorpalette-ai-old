@@ -100,13 +100,13 @@ function Pricing() {
                   {item.redirect.startsWith("http") && (
                     <Link href={item.redirect}>
                       <Button className="mt-2 w-full"
-                              variant={item.price === 0 ? "outline" : "default"}>{item.buttonLabel}</Button>
+                              variant={!item.isMostPop ? "outline" : "default"}>{item.buttonLabel}</Button>
                     </Link>
                   )}
                   {!item.redirect.startsWith("http") && (
                     <a href={item.redirect}>
                       <Button className="mt-2 w-full"
-                              variant={item.price === 0 ? "outline" : "default"}>{item.buttonLabel}</Button>
+                              variant={!item.isMostPop ? "outline" : "default"}>{item.buttonLabel}</Button>
                     </a>
                     )}
                 </div>
