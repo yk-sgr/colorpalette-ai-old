@@ -164,7 +164,14 @@ export const palettesRouter = createTRPCRouter({
             invocations: user.invocations + 1,
           }
         });
-        await ctx.prisma.palette.create({
+        return await ctx.prisma.palette.create({
+          include: {
+            colors: {
+              include: {
+                usages: true,
+              }
+            }
+          },
           data: {
             userId: ctx.auth.userId,
             input: input.description,
@@ -187,9 +194,6 @@ export const palettesRouter = createTRPCRouter({
             },
           }
         });
-        return {
-          palette,
-        };
         // JSON parse error
       } catch (err) {
         console.error(err);

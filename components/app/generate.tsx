@@ -12,7 +12,7 @@ export default function GenerateSection() {
   const ctx = api.useContext();
   const {mutate, isLoading, isSuccess, data, error, isError} = api.palettes.generate.useMutation({
     retry: 0,
-    onSuccess: async () => {
+    onSuccess: async (data) => {
       await ctx.palettes.invalidate();
     }
   });
@@ -51,7 +51,7 @@ export default function GenerateSection() {
         </div>
       </section>
       <section className={"container mt-8 flex flex-col justify-center gap-8"}>
-        {data && <Colors colors={data.palette.colors} showAddColor={true} />}
+        {data && <Colors colors={data.colors} showAddColor={true} />}
       </section>
     </>
   )

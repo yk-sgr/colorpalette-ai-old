@@ -5,7 +5,7 @@ import {PlusCircle} from 'lucide-react';
 export default function Colors({colors, showAddColor}: { colors: ColorType[], showAddColor?: boolean }) {
   return (
     <div className={"grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"}>
-      {colors.map(color => <Color color={color} key={color.name + color.background + color.foreground}/>)}
+      {colors.map(color => <Color color={color} key={color.id}/>)}
       {showAddColor && (
         <div className={"group flex flex-col gap-2"}>
           <div className={"flex items-center gap-2"}>
