@@ -25,7 +25,7 @@ function Header() {
           </p>
         </div>
         <Link href={"/app"}>
-          <Button className="md:w-fit w-full whitespace-nowrap" variant={"default"} size={"lg"}>Get started for
+          <Button className="w-full whitespace-nowrap md:w-fit" variant={"default"} size={"lg"}>Get started for
             free</Button>
         </Link>
       </section>
