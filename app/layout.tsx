@@ -7,12 +7,9 @@ import {cn} from "@/lib/utils"
 import {SiteHeader} from "@/components/site-header"
 import {TailwindIndicator} from "@/components/tailwind-indicator"
 import {ThemeProvider} from "@/components/theme-provider"
-import {ClerkProvider} from "@clerk/nextjs/app-beta";
 import React, {PropsWithChildren} from 'react';
 import {ClientProviders} from '@/app/client-provider';
 import SiteFooter from '@/components/site-footer';
-import PlausibleProvider from 'next-plausible';
-import * as process from 'process';
 
 export const metadata: Metadata = {
   title: {
@@ -24,11 +21,6 @@ export const metadata: Metadata = {
     {media: "(prefers-color-scheme: light)", color: "white"},
     {media: "(prefers-color-scheme: dark)", color: "black"},
   ],
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
 }
 
 type RootLayoutProps = PropsWithChildren;

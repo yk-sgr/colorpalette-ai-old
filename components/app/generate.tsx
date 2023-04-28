@@ -6,13 +6,15 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from '@/components/
 import {ChevronsUpDown, Loader2} from 'lucide-react';
 import {api} from '@/lib/api/client';
 import {useState} from 'react';
-import Color from '@/components/app/color';
-import {Switch} from '@/components/ui/switch';
-import {Label} from '@/components/ui/label';
+import SwitchableColors from '@/components/switchable-colors';
 
 export default function GenerateSection() {
+  const ctx = api.useContext();
   const {mutate, isLoading, isSuccess, data, error, isError} = api.palettes.generate.useMutation({
     retry: 0,
+    onSuccess: async () => {
+      await ctx.palettes.invalidate();
+    }
   });
   const [description, setDescription] = useState<string>("");
   const [useDarkMode, setUseDarkMode] = useState<boolean>(false);
@@ -49,27 +51,8 @@ export default function GenerateSection() {
           )}
         </div>
       </section>
-      <section className={"container mt-8 flex flex-col items-center justify-center"}>
-        <div className={"w-full"}>
-          {data && (
-            <div className="flex items-center space-x-2">
-              <Switch id="dark-mode" onClick={() => setUseDarkMode(!useDarkMode)}/>
-              <Label htmlFor="dark-mode">Dark Mode</Label>
-            </div>
-          )}
-        </div>
-        <div className={"mt-4 grid grid-cols-3 gap-4"}>
-          {data && useDarkMode && data.palette.dark.map(color => {
-            return (
-              <Color key={color.name + color.background + color.foreground} color={color}/>
-            )
-          })}
-          {data && !useDarkMode && data.palette.light.map(color => {
-            return (
-              <Color key={color.name + color.background + color.foreground} color={color}/>
-            )
-          })}
-        </div>
+      <section className={"container mt-8 flex flex-col justify-center gap-8"}>
+        {data && <SwitchableColors lightColors={data.palette.light} darkColors={data.palette.dark} showAddColor={true} />}
       </section>
     </>
   )

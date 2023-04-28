@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
 import {api} from '@/lib/api/server';
-import Color from '@/components/app/color';
+import SwitchableColors from '@/components/switchable-colors';
 
 export default async function PalettePage({params}: { params: { paletteId: string } }) {
   const data = await api.palettes.byId.fetch({id: params.paletteId});
@@ -17,38 +17,10 @@ export default async function PalettePage({params}: { params: { paletteId: strin
             <Button size={"sm"}>Edit</Button>
           </Link>
         </div>
+        <p className={"text-muted-foreground"}>{data.input}</p>
       </section>
-      <section className={"container mt-8 flex flex-col items-center justify-center"}>
-        <div>
-          <p className="text-lg font-semibold">Light mode colors</p>
-          <div className={"grid grid-cols-4 gap-6"}>
-            {/*data && data.light.map(color => {
-              return (
-                <div key={color.name + color.background + color.foreground}>
-                  <div className={"h-32 rounded-xl"} style={{backgroundColor: color.background}} />
-                  <p>{color.name}</p>
-                </div>
-              )
-            })*/}
-          </div>
-          <div className={"mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3"}>
-            {data && data.light.map(color => {
-              return (
-                <Color key={color.name + color.background + color.foreground} color={color}/>
-              )
-            })}
-          </div>
-          <div className={"mt-8"}>
-            <p className="text-lg font-semibold">Dark mode colors</p>
-            <div className={"mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3"}>
-              {data && data.dark.map(color => {
-                return (
-                  <Color key={color.name + color.background + color.foreground} color={color}/>
-                )
-              })}
-            </div>
-          </div>
-        </div>
+      <section className={"container mt-8 flex flex-col"}>
+        <SwitchableColors lightColors={data.light} darkColors={data.dark} showAddColor={true} />
       </section>
     </div>
   )
