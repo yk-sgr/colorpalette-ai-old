@@ -39,7 +39,7 @@ model InvocationMetric {
 
 model Palette {
   id          String   @id @default(cuid())
-  description String?  @db.Text()
+  description String   @db.Text()
   input       String
   name        String
   userId      String

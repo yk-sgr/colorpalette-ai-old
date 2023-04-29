@@ -12,7 +12,7 @@ export type GenerateColor = {
 export type Palette = {
   id: string,
   input: string,
-  description: string | null;
+  description: string;
   name: string;
   colors: Color[],
 }

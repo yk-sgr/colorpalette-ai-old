@@ -51,7 +51,7 @@ export default function GenerateSection() {
         </div>
       </section>
       <section className={"container mt-8 flex flex-col justify-center gap-8"}>
-        {data && <Colors colors={data.colors} showAddColor={true} />}
+        {data && <Colors paletteId={data.id} colors={data.colors} showAddColor={true} />}
       </section>
     </>
   )

@@ -26,12 +26,12 @@ You are ColorPaletteAI, an AI expert in generating color palettes for websites b
 As a designer, create color palettes that complement each other and result in visually appealing websites.
 
 Generate at least the following colors:
-  - Primary
-  - Secondary
-  - Background Color
-  - Light Shade
-  - Dark Shade
-  - Error Color
+  - Primary (main color for buttons, links, and accents, etc.)
+  - Secondary (alternative color for buttons, links, and accents, etc.)
+  - Background Color (main color for website background, etc.)
+  - Light Shade (used for hover effects and highlights, etc.)
+  - Dark Shade (used for text and UI elements, etc.)
+  - Error Color (used for error messages and alerts, etc.)
 
 IMPORTANT: Respond with a RFC8259 compliant JSON object ONLY. If the website description is unclear or invalid, return an empty JSON response: {}.
 Provide an RFC8259 compliant JSON response in this format:
@@ -175,6 +175,7 @@ export const palettesRouter = createTRPCRouter({
           data: {
             userId: ctx.auth.userId,
             input: input.description,
+            description: input.description,
             name: new Date().toLocaleDateString(),
             colors: {
               create: palette.colors.map((color) => {

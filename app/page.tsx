@@ -1,6 +1,5 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-import {env} from "@/env";
 
 export default function IndexPage() {
   return (
@@ -47,7 +46,7 @@ function Pricing() {
         "* Advanced generation options",
         "* Palette History",
         "* Regenerate colors",
-        "* Edit palettes manually",
+        "* Edit (palettes) manually",
       ],
       redirect: "/api/stripe/create-checkout-session",
     },

@@ -41,7 +41,7 @@ async function Palettes() {
 
 function PaletteCard({palette}: { palette: Palette }) {
   return (
-    <Link href={`/app/palettes/${palette.id}`}>
+    <Link href={`/app/${palette.id}`}>
       <Card>
         <CardHeader>
           <CardTitle>{palette.name}</CardTitle>

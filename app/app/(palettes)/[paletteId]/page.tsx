@@ -10,7 +10,7 @@ export default async function PalettePage({params}: { params: { paletteId: strin
     <div className={"flex flex-col gap-8"}>
       {data && <Header id={data.id} name={data.name} input={data.input}/>}
       <section className={"container flex flex-col"}>
-        <Colors colors={data.colors} showAddColor={true}/>
+        <Colors paletteId={data.id} colors={data.colors} showAddColor={true}/>
       </section>
     </div>
   )
@@ -22,7 +22,7 @@ function Header({id, name, input}: { id: string, name: string, input: string }) 
       <h2 className={"text-2xl font-bold text-foreground/90"}>{name}</h2>
       <div className={"flex items-end justify-between border-b pb-4"}>
         <p className={"text-muted-foreground"}>{input}</p>
-        <Link href={`/app/palettes/${id}/edit`}>
+        <Link href={`/app/${id}/edit`}>
           <Button size={"default"} variant={"simple"}>Edit</Button>
         </Link>
       </div>
