@@ -1,6 +1,7 @@
 import {Color} from '@/lib/types';
 import Link from 'next/link';
 import ClickCopy from '@/components/click-copy';
+import Text from '@/components/ui/typography/Text';
 
 export default function Color({paletteId, color}: { paletteId: string, color: Color }) {
   return (
@@ -10,8 +11,7 @@ export default function Color({paletteId, color}: { paletteId: string, color: Co
           className={"flex items-center gap-2 transition duration-100 ease-out group-hover:translate-y-10 group-hover:transition group-hover:duration-75 group-hover:ease-in"}>
           <div className={`h-6 w-6 rounded-full border border-muted-foreground/20`}
                style={{backgroundColor: color.hex}}/>
-          <p
-            className={"text-center text-lg font-semibold text-muted-foreground"}>{color.name}</p>
+          <Text size={"lg"} weight={"semibold"}>{color.name}</Text>
         </div>
         <div className={"flex flex-col gap-2"}>
           <Link href={`/app/${paletteId}/${color.id}`}>
@@ -23,9 +23,7 @@ export default function Color({paletteId, color}: { paletteId: string, color: Co
         </div>
       </div>
       <ClickCopy>
-        <p className={"z-0 text-center font-semibold text-muted-foreground transition duration-100 ease-out hover:text-foreground/70 hover:transition hover:duration-75 hover:ease-in active:text-foreground/90"}>
-          {color.hex}
-        </p>
+        <Text weight={"semibold"} hover={"enable"} active={"enable"}>{color.hex}</Text>
       </ClickCopy>
     </div>
   )

@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import {Button} from '@/components/ui/button';
 import {api} from '@/lib/api/server';
 import Colors from '@/components/colors';
+import Text from '@/components/ui/typography/Text';
+import Heading2 from '@/components/ui/typography/Heading2';
 
 export default async function PalettePage({params}: { params: { paletteId: string } }) {
   const data = await api.palettes.byId.fetch({id: params.paletteId});
 
   return (
     <div className={"flex flex-col gap-8"}>
-      {data && <Header id={data.id} name={data.name} input={data.input}/>}
+      {data && <Header id={data.id} name={data.name} description={data.description}/>}
       <section className={"container flex flex-col"}>
         <Colors paletteId={data.id} colors={data.colors} showAddColor={true}/>
       </section>
@@ -16,15 +16,12 @@ export default async function PalettePage({params}: { params: { paletteId: strin
   )
 }
 
-function Header({id, name, input}: { id: string, name: string, input: string }) {
+function Header({id, name, description}: { id: string, name: string, description: string }) {
   return (
-    <section className="container flex flex-col">
-      <h2 className={"text-2xl font-bold text-foreground/90"}>{name}</h2>
+    <section className="container flex flex-col gap-2">
+      <Heading2>{name}</Heading2>
       <div className={"flex items-end justify-between border-b pb-4"}>
-        <p className={"text-muted-foreground"}>{input}</p>
-        <Link href={`/app/${id}/edit`}>
-          <Button size={"default"} variant={"simple"}>Edit</Button>
-        </Link>
+        <Text size={"lg"}>{description}</Text>
       </div>
     </section>
   )

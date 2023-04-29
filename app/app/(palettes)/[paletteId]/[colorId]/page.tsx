@@ -1,24 +1,32 @@
 import {api} from '@/lib/api/server';
-import {ArrowRight} from 'lucide-react';
+import {ArrowLeft, ArrowRight} from 'lucide-react';
 import ClickCopy from '@/components/click-copy';
+import {Button} from '@/components/ui/button';
+import Link from 'next/link';
+import Text from '@/components/ui/typography/Text';
 
-export default async function ColorDetailPage(props: { params: { colorId: string } }) {
+export default async function ColorDetailPage(props: { params: { colorId: string, paletteId: string } }) {
   const color = await api.colors.byId.fetch({id: props.params.colorId});
 
   return (
     <div className={"flex flex-col gap-8"}>
-      <section className={"container mx-auto flex justify-between"}>
-        <div
-          className={"flex items-center gap-4 transition duration-100 ease-out group-hover:translate-y-10 group-hover:transition group-hover:duration-75 group-hover:ease-in"}>
-          <div className={`h-8 w-8 rounded-full border border-muted-foreground/20`}
-               style={{backgroundColor: color.hex}}/>
-          <p
-            className={"text-center text-xl font-semibold text-muted-foreground"}>{color.name}</p>
+      <section className={"container mx-auto flex flex-col gap-8"}>
+        <Link href={`/app/${props.params.paletteId}`} className={"group flex gap-2"}>
+          <ArrowLeft className={"h-6 w-6 text-foreground/60 transition duration-100 ease-out group-hover:text-foreground/80 group-hover:transition group-hover:duration-75 group-hover:ease-in group-active:text-foreground/90"} strokeWidth={3}/>
+          <span className={"font-semibold text-foreground/60 transition duration-100 ease-out group-hover:text-foreground/80 group-hover:transition group-hover:duration-75 group-hover:ease-in group-active:text-foreground/90"}>Back</span>
+        </Link>
+        <div className={"flex w-full justify-between"}>
+          <div
+            className={"flex items-center gap-4 transition duration-100 ease-out group-hover:translate-y-10 group-hover:transition group-hover:duration-75 group-hover:ease-in"}>
+            <div className={`h-8 w-8 rounded-full border border-muted-foreground/20`}
+                 style={{backgroundColor: color.hex}}/>
+            <p
+              className={"text-center text-xl font-semibold text-foreground/90"}>{color.name}</p>
+          </div>
+          <ClickCopy>
+            <Text size={"lg"} weight={"semibold"} hover={"enable"} active={"enable"}>{color.hex}</Text>
+          </ClickCopy>
         </div>
-        <ClickCopy>
-          <p
-            className={"text-center text-xl font-semibold text-muted-foreground transition duration-100 ease-out hover:text-foreground/70 hover:transition hover:duration-75 hover:ease-in active:text-foreground/90"}>{color.hex}</p>
-        </ClickCopy>
       </section>
       <section className={"container mx-auto mt-4 flex flex-col gap-2"}>
         <h2 className={"text-xl font-semibold text-foreground/80"}>Description</h2>

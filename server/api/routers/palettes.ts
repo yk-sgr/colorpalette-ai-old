@@ -197,6 +197,7 @@ export const palettesRouter = createTRPCRouter({
         });
         // JSON parse error
       } catch (err) {
+        console.log(completion.data.choices[0].message.content.replaceAll("]}.", "]}"));
         console.error(err);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
