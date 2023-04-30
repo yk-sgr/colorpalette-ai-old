@@ -1,9 +1,8 @@
+import { createTRPCNextLayout } from "@/@trpc/next-layout/server";
+import { createContextInner } from "@/server/api/context";
+import { appRouter } from "@/server/api/root";
 import { auth as getAuth } from "@clerk/nextjs/app-beta";
 import superjson from "superjson";
-
-import {createTRPCNextLayout} from '@/@trpc/next-layout/server';
-import {appRouter} from '@/server/api/root';
-import {createContextInner} from '@/server/api/context';
 
 export const api = createTRPCNextLayout({
   router: appRouter,

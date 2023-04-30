@@ -1,8 +1,9 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import {stripe} from '@/lib/stripe';
-import {env} from '@/env';
-import {buffer} from 'micro';
-import {prisma} from '@/server/db';
+import { NextApiRequest, NextApiResponse } from "next";
+import { env } from "@/env";
+import { prisma } from "@/server/db";
+import { buffer } from "micro";
+
+import { stripe } from "@/lib/stripe";
 
 export const config = {
   api: {
@@ -10,55 +11,71 @@ export const config = {
   },
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== "POST") {
     res.status(405).send("Method Not Allowed");
-    return
+    return;
   }
   const sig = req.headers["stripe-signature"] as string;
   const buf = await buffer(req);
 
   let event;
   try {
-    event = stripe.webhooks.constructEvent(buf, sig, env.STRIPE_ENDPOINT_SECRET);
+    event = stripe.webhooks.constructEvent(
+      buf,
+      sig,
+      env.STRIPE_ENDPOINT_SECRET
+    );
   } catch (err) {
-    console.error(err)
+    console.error(err);
     res.status(400).send(`Webhook Error: ${err.message}`);
-    return
+    return;
   }
 
   switch (event.type) {
-    case 'customer.subscription.created':
+    case "customer.subscription.created":
       const customerSubscriptionCreated = event.data.object;
       await prisma.user.update({
         where: {
           id: customerSubscriptionCreated.metadata.userId,
         },
         data: {
-          plan: env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionCreated.plan.id ? 'PRO' : 'NONE',
-        }
+          plan:
+            env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionCreated.plan.id
+              ? "PRO"
+              : "NONE",
+        },
       });
       break;
-    case 'customer.subscription.deleted':
+    case "customer.subscription.deleted":
       const customerSubscriptionDeleted = event.data.object;
       await prisma.user.update({
         where: {
           id: customerSubscriptionDeleted.metadata.userId,
         },
         data: {
-          plan: env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionDeleted.plan.id ? 'PRO' : 'NONE',
-        }
+          plan:
+            env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionDeleted.plan.id
+              ? "PRO"
+              : "NONE",
+        },
       });
       break;
-    case 'customer.subscription.updated':
+    case "customer.subscription.updated":
       const customerSubscriptionUpdated = event.data.object;
       await prisma.user.update({
         where: {
           id: customerSubscriptionUpdated.metadata.userId,
         },
         data: {
-          plan: env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionUpdated.plan.id ? 'PRO' : 'NONE',
-        }
+          plan:
+            env.STRIPE_PRICE_PRO_PLAN === customerSubscriptionUpdated.plan.id
+              ? "PRO"
+              : "NONE",
+        },
       });
       break;
   }

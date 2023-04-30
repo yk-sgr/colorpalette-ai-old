@@ -1,9 +1,19 @@
 "use client";
 
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from '@/components/ui/tooltip';
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-export default function ClickCopy({children}: { children: React.ReactElement }) {
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+export default function ClickCopy({
+  children,
+}: {
+  children: React.ReactElement;
+}) {
   const [clickOpen, setClickOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -16,22 +26,25 @@ export default function ClickCopy({children}: { children: React.ReactElement }) 
       setOpen(false);
       setClickOpen(false);
     }, 1000);
-  }
+  };
 
   const onOpenChange = (value: boolean) => {
     if (!clickOpen) {
       setOpen(value);
     }
-  }
+  };
 
   return (
     <TooltipProvider>
-      <Tooltip onOpenChange={(value) => onOpenChange(value)} open={open || clickOpen}>
+      <Tooltip
+        onOpenChange={(value) => onOpenChange(value)}
+        open={open || clickOpen}
+      >
         <TooltipContent side={"top"}>
           {clickOpen ? "Copied!" : "Click to copy"}
         </TooltipContent>
         <TooltipTrigger onClick={() => onClick()}>{children}</TooltipTrigger>
       </Tooltip>
     </TooltipProvider>
-  )
+  );
 }

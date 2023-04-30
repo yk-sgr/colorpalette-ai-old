@@ -1,8 +1,14 @@
-import Link from 'next/link';
-import {Button} from '@/components/ui/button';
-import {api} from '@/lib/api/server';
-import {Palette} from '@/lib/types';
-import {Card, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import Link from "next/link";
+
+import { api } from "@/lib/api/server";
+import { Palette } from "@/lib/types";
+import { Button } from "@/components/ui/buttons/Button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function IndexPage() {
   return (
@@ -17,10 +23,10 @@ export default function IndexPage() {
           </Link>
         </div>
       </section>
-      { /* @ts-ignore */ }
+      {/* @ts-ignore */}
       <Palettes />
     </div>
-  )
+  );
 }
 
 async function Palettes() {
@@ -29,17 +35,16 @@ async function Palettes() {
   return (
     <section className={"container mx-auto"}>
       <div className={"grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"}>
-        {data && data.map(palette => {
-          return (
-            <PaletteCard key={palette.id} palette={palette}/>
-          )
-        })}
+        {data &&
+          data.map((palette) => {
+            return <PaletteCard key={palette.id} palette={palette} />;
+          })}
       </div>
     </section>
-  )
+  );
 }
 
-function PaletteCard({palette}: { palette: Palette }) {
+function PaletteCard({ palette }: { palette: Palette }) {
   return (
     <Link href={`/app/${palette.id}`}>
       <Card>
@@ -49,5 +54,5 @@ function PaletteCard({palette}: { palette: Palette }) {
         </CardHeader>
       </Card>
     </Link>
-  )
+  );
 }

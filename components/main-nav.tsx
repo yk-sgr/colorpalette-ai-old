@@ -1,28 +1,32 @@
-import Link from "next/link"
-
-import { NavItem } from "@/types/nav"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/config/site";
+import Image from "next/image";
+import Link from "next/link";
 import Logo from "@/public/logo.svg";
-import Image from 'next/image';
+import { NavItem } from "@/types/nav";
+
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import Text from "@/components/ui/typography/Text";
 
 const items = [
   {
     title: "Home",
     href: "/",
-  }
+  },
 ] as NavItem[];
 
 export function MainNav() {
   return (
-    <div className="flex gap-6 md:gap-10">
+    <div className="flex items-center gap-6 md:gap-10">
       <span className="hidden items-center gap-2 font-bold sm:flex">
         <span className="h-6 w-6">
-          <Image src={Logo} alt={"ColorPaletteAI Logo"} height={32} width={32} />
+          <Image
+            src={Logo}
+            alt={"ColorPaletteAI Logo"}
+            height={32}
+            width={32}
+          />
         </span>
-        <span>
-          {siteConfig.name}
-        </span>
+        <span>{siteConfig.name}</span>
       </span>
       {items?.length ? (
         <nav className="gap-6 md:flex">
@@ -33,16 +37,22 @@ export function MainNav() {
                   key={index}
                   href={item.href}
                   className={cn(
-                    "flex items-center text-lg font-semibold text-muted-foreground sm:text-sm",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >
-                  {item.title}
+                  <Text
+                    size={"sm"}
+                    weight={"semibold"}
+                    hover={"enable"}
+                    active={"enable"}
+                  >
+                    {item.title}
+                  </Text>
                 </Link>
               )
           )}
         </nav>
       ) : null}
     </div>
-  )
+  );
 }

@@ -28,13 +28,13 @@ interface CreateTRPCNextLayoutOptions<TRouter extends AnyRouter> {
 export type DecorateProcedure<TProcedure extends AnyProcedure> =
   TProcedure extends AnyQueryProcedure
     ? {
-      fetch(
-        input: inferProcedureInput<TProcedure>
-      ): Promise<inferProcedureOutput<TProcedure>>;
-      fetchInfinite(
-        input: inferProcedureInput<TProcedure>
-      ): Promise<inferProcedureOutput<TProcedure>>;
-    }
+        fetch(
+          input: inferProcedureInput<TProcedure>
+        ): Promise<inferProcedureOutput<TProcedure>>;
+        fetchInfinite(
+          input: inferProcedureInput<TProcedure>
+        ): Promise<inferProcedureOutput<TProcedure>>;
+      }
     : never;
 
 type OmitNever<TType> = Pick<
@@ -52,12 +52,12 @@ export type DecoratedProcedureRecord<
 > = OmitNever<{
   [TKey in keyof TProcedures]: TProcedures[TKey] extends AnyRouter
     ? DecoratedProcedureRecord<
-      TProcedures[TKey]["_def"]["record"],
-      `${TPath}${TKey & string}.`
-    >
+        TProcedures[TKey]["_def"]["record"],
+        `${TPath}${TKey & string}.`
+      >
     : TProcedures[TKey] extends AnyQueryProcedure
-      ? DecorateProcedure<TProcedures[TKey]>
-      : never;
+    ? DecorateProcedure<TProcedures[TKey]>
+    : never;
 }>;
 
 type CreateTRPCNextLayout<TRouter extends AnyRouter> = DecoratedProcedureRecord<
@@ -74,12 +74,12 @@ function getQueryKey(
   return input === undefined
     ? [path, { type: isFetchInfinite ? "infinite" : "query" }] // We added { type: "infinite" | "query"  }, because it is how trpc v10.0 format the new queryKeys
     : [
-      path,
-      {
-        input: { ...input },
-        type: isFetchInfinite ? "infinite" : "query",
-      },
-    ];
+        path,
+        {
+          input: { ...input },
+          type: isFetchInfinite ? "infinite" : "query",
+        },
+      ];
 }
 
 export function createTRPCNextLayout<TRouter extends AnyRouter>(

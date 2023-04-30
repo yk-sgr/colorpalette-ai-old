@@ -3,5 +3,5 @@ export default function EditPage() {
     <section className={"container mx-auto"}>
       <p className={"text-muted-foreground"}>Coming soon...</p>
     </section>
-  )
+  );
 }

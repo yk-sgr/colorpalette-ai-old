@@ -1,12 +1,17 @@
-import {Button} from "@/components/ui/button";
 import Link from "next/link";
+import { Check } from "lucide-react";
+
+import { Button } from "@/components/ui/buttons/Button";
+import LinkButton from "@/components/ui/buttons/LinkButton";
+import Heading2 from "@/components/ui/typography/Heading2";
+import Text from "@/components/ui/typography/Text";
 
 export default function IndexPage() {
   return (
     <>
-      <Header/>
+      <Header />
     </>
-  )
+  );
 }
 
 function Header() {
@@ -15,20 +20,31 @@ function Header() {
       <section className="container grid gap-6 pb-8 pt-6 md:py-10">
         <div className="flex max-w-[980px] flex-col items-start gap-2">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-            Discover Your Perfect Color Palette with <span
-            className={"bg-gradient-to-r from-indigo-500 to-primary bg-clip-text text-transparent"}>AI-Powered ColorPaletteAI.</span>
+            Discover Your Perfect Color Palette with{" "}
+            <span
+              className={
+                "bg-gradient-to-r from-indigo-500 to-primary bg-clip-text text-transparent"
+              }
+            >
+              AI-Powered ColorPaletteAI.
+            </span>
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-            Effortlessly convert your product descriptions into visually captivating color schemes with our AI-powered
-            tool, perfect for branding, design, and web projects.
+            Effortlessly convert your product descriptions into visually
+            captivating color schemes with our AI-powered tool, perfect for
+            branding, design, and web projects.
           </p>
         </div>
-        <Link href={"/app"}>
-          <Button className="w-full whitespace-nowrap md:w-fit" variant={"default"} size={"lg"}>Get started for
-            free</Button>
-        </Link>
+        <LinkButton
+          href={"/app"}
+          size={"lg"}
+          width={"full"}
+          className={"sm:w-fit"}
+        >
+          Get started for free
+        </LinkButton>
       </section>
-      <Pricing/>
+      <Pricing />
     </>
   );
 }
@@ -56,10 +72,8 @@ function Pricing() {
       buttonLabel: "Continue as Free",
       price: 0,
       isMostPop: false,
-      features: [
-        "3 color generations",
-      ],
-      redirect: "/app"
+      features: ["3 color generations"],
+      redirect: "/app",
     },
   ];
 
@@ -67,73 +81,63 @@ function Pricing() {
     <section className="relative py-14">
       <div className="absolute top-0 h-[521px] w-full bg-gradient-to-b from-primary/10 to-background"></div>
       <div className="mx-auto max-w-screen-xl sm:px-4 md:px-8">
-        <div className="container relative mx-auto max-w-xl space-y-3 sm:px-0 sm:text-center">
-          <h3 className="font-semibold text-primary">
-            Pricing
-          </h3>
-          <p className="text-3xl font-semibold sm:text-4xl">
-            Affordable and Transparent Pricing
-          </p>
+        <div className="container mx-auto max-w-xl space-y-3 sm:px-0 sm:text-center">
+          <Heading2>Pricing</Heading2>
           <div className="max-w-xl text-muted-foreground">
-            <p>
-              Our all-in-one plan caters to both personal and small business needs, offering the ideal balance of
-              features and affordability.
-            </p>
+            <Text weight={"medium"}>
+              Our all-in-one plan caters to both personal and small business
+              needs, offering the ideal balance of features and affordability.
+            </Text>
           </div>
         </div>
         <div className="container mx-auto mt-16 justify-center sm:flex">
-          {
-            plans.map((item, idx) => (
-              <div key={idx}
-                   className={`relative mt-6 flex flex-1 flex-col items-stretch rounded-lg sm:mt-0 sm:max-w-md ${item.isMostPop ? "bg-accent shadow-lg sm:border" : ""}`}>
-                <div className={`space-y-4 border-b ${item.isMostPop ? "border-gray-300" : ""} p-4 py-8 md:p-8`}>
-                  <span className="font-medium text-primary">
-                      {item.name}
-                  </span>
-                  <div className={`text-3xl font-semibold text-accent-foreground`}>
-                    ${item.price} <span className="text-xl font-normal">/mo</span>
+          {plans.map((item, idx) => (
+            <div
+              key={idx}
+              className={`relative mt-6 flex flex-1 flex-col items-stretch rounded-lg border border-foreground/10 px-2 sm:mt-0 sm:max-w-md ${
+                item.isMostPop ? "bg-accent shadow-lg sm:border" : ""
+              }`}
+            >
+              <div
+                className={`flex flex-col gap-6 border-b ${
+                  item.isMostPop ? "border-gray-300" : ""
+                } p-4 py-8 md:p-8`}
+              >
+                <span className="font-medium text-primary">{item.name}</span>
+                <div className={"space-y-2"}>
+                  <div
+                    className={`text-3xl font-semibold text-accent-foreground`}
+                  >
+                    ${item.price}{" "}
+                    <span className="text-xl font-normal">/mo</span>
                   </div>
-                  <p className={"text-muted-foreground"}>
-                    {item.desc}
-                  </p>
-                  {item.redirect.startsWith("http") && (
-                    <Link href={item.redirect}>
-                      <Button className="mt-2 w-full"
-                              variant={!item.isMostPop ? "outline" : "default"}>{item.buttonLabel}</Button>
-                    </Link>
-                  )}
-                  {!item.redirect.startsWith("http") && (
-                    <a href={item.redirect}>
-                      <Button className="mt-2 w-full"
-                              variant={!item.isMostPop ? "outline" : "default"}>{item.buttonLabel}</Button>
-                    </a>
-                    )}
+                  <Text>{item.desc}</Text>
                 </div>
-                <ul className="space-y-3 p-4 py-8 md:p-8">
-                  <li className="pb-2 font-medium">
-                    <p className={""}>Features</p>
-                  </li>
-                  {
-                    item.features.map((featureItem, idx) => (
-                      <li key={idx} className="flex items-center gap-5 text-muted-foreground">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 text-primary"
-                          viewBox="0 0 20 20"
-                          fill="currentColor">
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"></path>
-                        </svg>
-                        {featureItem}
-                      </li>
-                    ))
-                  }
-                </ul>
+                <LinkButton
+                  href={item.redirect}
+                  size={"lg"}
+                  variant={!item.isMostPop ? "outline" : "default"}
+                  width={"full"}
+                >
+                  {item.buttonLabel}
+                </LinkButton>
               </div>
-            ))
-          }
+              <ul className="space-y-3 p-4 py-8 md:p-8">
+                <li className="pb-2 font-medium">
+                  <Text weight={"semibold"}>Features</Text>
+                </li>
+                {item.features.map((featureItem, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-center gap-5 text-muted-foreground"
+                  >
+                    <Check className={"text-primary"} />
+                    <Text>{featureItem}</Text>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
