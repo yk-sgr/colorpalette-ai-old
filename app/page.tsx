@@ -90,7 +90,7 @@ function Pricing() {
             </Text>
           </div>
         </div>
-        <div className="container mx-auto mt-16 justify-center sm:flex">
+        <div className="container mx-auto mt-16 justify-center sm:flex gap-6">
           {plans.map((item, idx) => (
             <div
               key={idx}
