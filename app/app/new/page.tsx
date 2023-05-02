@@ -1,3 +1,5 @@
+"use client";
+
 import GenerateSection from "@/components/app/generate";
 import SectionHeader from '@/components/section-header';
 

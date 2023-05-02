@@ -33,5 +33,5 @@ export default withClerkMiddleware((request: NextRequest) => {
 
 // Stop Middleware running on static files and public folder
 export const config = {
-  matcher: "/((?!_next/image|_next/static|favicon.ico|site.webmanifest).*)",
+  matcher: "/((?!_next/image|_next/static|favicon.ico|robots.txt|site.webmanifest).*)",
 };
