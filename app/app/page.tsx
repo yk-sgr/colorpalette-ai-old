@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { api } from "@/lib/api/server";
 import { Palette } from "@/lib/types";
-import { Button } from "@/components/ui/buttons/Button";
 import {
   Card,
   CardDescription,
@@ -48,7 +47,7 @@ function PaletteCard({ palette }: { palette: Palette }) {
       <Card>
         <CardHeader>
           <CardTitle>{palette.name}</CardTitle>
-          <CardDescription>{palette.input}</CardDescription>
+          <CardDescription>{palette.description}</CardDescription>
         </CardHeader>
       </Card>
     </Link>

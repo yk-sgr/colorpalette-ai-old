@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/buttons/Button";
 import LinkButton from "@/components/ui/buttons/LinkButton";
 import Heading2 from "@/components/ui/typography/Heading2";
 import Text from "@/components/ui/typography/Text";
+import {cn} from '@/lib/utils';
 
 export default function IndexPage() {
   return (
@@ -59,10 +60,10 @@ function Pricing() {
       isMostPop: true,
       features: [
         "Unlimited color generations",
-        "* Advanced generation options",
-        "* Palette History",
+        "Advanced generation options",
+        "Palette History",
         "* Regenerate colors",
-        "* Edit (palettes) manually",
+        "* Edit palettes and colors",
       ],
       redirect: "/api/stripe/create-checkout-session",
     },
