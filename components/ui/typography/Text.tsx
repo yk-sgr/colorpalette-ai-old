@@ -18,6 +18,7 @@ const textVariants = cva(
         sm: "text-sm",
         md: "text-md",
         lg: "text-lg",
+        xl: "text-xl",
       },
       hover: {
         default: "",

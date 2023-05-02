@@ -10,7 +10,7 @@ const Heading1 = React.forwardRef<HTMLHeadingElement, Heading2Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <h1
-        className={cn(className, "text-4xl font-bold text-foreground/90")}
+        className={cn(className, "text-4xl font-bold text-foreground")}
         {...props}
         ref={ref}
       >

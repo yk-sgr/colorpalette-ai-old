@@ -9,19 +9,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Heading2 from '@/components/ui/typography/Heading2';
+import LinkButton from '@/components/ui/buttons/LinkButton';
+import SectionHeader from '@/components/section-header';
 
 export default function IndexPage() {
   return (
     <div className={"flex flex-col gap-8"}>
       <section className="container flex flex-col gap-2">
-        <div className={"flex justify-between border-b"}>
-          <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            Your Palettes
-          </h2>
-          <Link href={"/app/new"}>
-            <Button size={"sm"}>Create New</Button>
-          </Link>
-        </div>
+        <SectionHeader title={"Your palettes"}>
+          <LinkButton href={"/app/new"} variant={"simple"} size={"sm"}>Create new</LinkButton>
+        </SectionHeader>
       </section>
       {/* @ts-ignore */}
       <Palettes />
@@ -46,7 +44,7 @@ async function Palettes() {
 
 function PaletteCard({ palette }: { palette: Palette }) {
   return (
-    <Link href={`/app/${palette.id}`}>
+    <Link href={`/app/${palette.id}`} className={"h-max"}>
       <Card>
         <CardHeader>
           <CardTitle>{palette.name}</CardTitle>

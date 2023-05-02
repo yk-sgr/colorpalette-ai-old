@@ -2,6 +2,7 @@ import { api } from "@/lib/api/server";
 import Colors from "@/components/colors";
 import Heading2 from "@/components/ui/typography/Heading2";
 import Text from "@/components/ui/typography/Text";
+import Heading3 from '@/components/ui/typography/Heading3';
 
 export default async function PalettePage({
   params,
@@ -33,9 +34,9 @@ function Header({
 }) {
   return (
     <section className="container flex flex-col gap-2">
-      <Heading2>{name}</Heading2>
+      <Heading3>{name}</Heading3>
       <div className={"flex items-end justify-between border-b pb-4"}>
-        <Text size={"lg"}>{description}</Text>
+        <Text size={"default"}>{description}</Text>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ export default function Colors({
   return (
     <div
       className={
-        "grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        "grid grid-cols-2 gap-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
       }
     >
       {colors.map((color) => (
@@ -28,12 +28,12 @@ export default function Colors({
             <div
               className={`h-6 w-6 rounded-full border border-muted-foreground/20`}
             />
-            <Text size={"lg"} weight={"semibold"}>
+            <Text size={"lg"} weight={"semibold"} className={"overflow-hidden text-ellipsis whitespace-nowrap"}>
               Generate more
             </Text>
           </div>
           <div
-            className={`group flex h-60 cursor-pointer items-center justify-center rounded-xl border-2 border-foreground/20 transition duration-100 ease-out hover:border-foreground/50 hover:transition hover:duration-75 hover:ease-in active:border-foreground/80 active:duration-0`}
+            className={`group flex aspect-square cursor-pointer items-center justify-center rounded-xl border-2 border-foreground/20 transition duration-100 ease-out hover:border-foreground/50 hover:transition hover:duration-75 hover:ease-in active:border-foreground/80 active:duration-0`}
           >
             <PlusCircle
               strokeWidth={1}

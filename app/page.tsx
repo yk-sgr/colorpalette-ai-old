@@ -19,7 +19,7 @@ function Header() {
     <>
       <section className="container grid gap-6 pb-8 pt-6 md:py-10">
         <div className="flex max-w-[980px] flex-col items-start gap-2">
-          <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl">
             Discover Your Perfect Color Palette with{" "}
             <span
               className={
@@ -29,11 +29,11 @@ function Header() {
               AI-Powered ColorPaletteAI.
             </span>
           </h1>
-          <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
+          <Text size={"lg"} weight={"medium"}>
             Effortlessly convert your product descriptions into visually
             captivating color schemes with our AI-powered tool, perfect for
             branding, design, and web projects.
-          </p>
+          </Text>
         </div>
         <LinkButton
           href={"/app"}
@@ -90,7 +90,7 @@ function Pricing() {
             </Text>
           </div>
         </div>
-        <div className="container mx-auto mt-16 justify-center sm:flex gap-6">
+        <div className="container mx-auto mt-16 justify-center gap-6 sm:flex">
           {plans.map((item, idx) => (
             <div
               key={idx}

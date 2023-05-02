@@ -26,7 +26,7 @@ export function MainNav() {
             width={32}
           />
         </span>
-        <span>{siteConfig.name}</span>
+        <span>{siteConfig.name} <span className={"text-xs"}>BETA</span></span>
       </span>
       {items?.length ? (
         <nav className="gap-6 md:flex">

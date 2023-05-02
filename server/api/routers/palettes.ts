@@ -165,7 +165,7 @@ export const palettesRouter = createTRPCRouter({
 
       try {
         const palette = JSON.parse(
-          completion.data.choices[0].message.content.replaceAll("]}.", "]}")
+          completion.data.choices[0].message.content.replaceAll("]}.", "]}").replaceAll("```", "")
         ) as GeneratePalette;
         await ctx.prisma.user.update({
           where: {

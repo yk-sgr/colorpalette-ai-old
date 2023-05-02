@@ -22,11 +22,11 @@ const linkButtonVariants = cva(
         link: "underline-offset-4 hover:underline text-primary",
       },
       size: {
-        sm: "px-3 py-1.5",
-        default: "px-4 py-2",
-        md: "px-5 py-3",
-        lg: "px-6 py-3.5",
-        xl: "px-7 py-4",
+        sm: "px-3 py-1.5 font-medium",
+        default: "px-4 py-2 font-medium",
+        md: "px-5 py-3 font-semibold",
+        lg: "px-6 py-3.5 font-semibold",
+        xl: "px-7 py-4 font-semibold",
       },
       width: {
         default: "w-fit",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ChevronsUpDown, Loader2 } from "lucide-react";
 
 import { api } from "@/lib/api/client";
@@ -13,7 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import Colors from "../colors";
 
-export default function GenerateSection() {
+export default function GenerateSection(props: React.ReactHTMLElement<HTMLElement>) {
   const ctx = api.useContext();
   const { mutate, isLoading, isSuccess, data, error, isError } =
     api.palettes.generate.useMutation({
@@ -30,10 +30,7 @@ export default function GenerateSection() {
 
   return (
     <>
-      <section className="container mt-8 flex flex-col gap-2">
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          Generate new color palette.
-        </h3>
+      <section className="container flex flex-col gap-2" {...props}>
         <div className="flex flex-col gap-4">
           <Textarea
             placeholder="Enter product description..."
