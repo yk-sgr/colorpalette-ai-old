@@ -39,6 +39,12 @@ export const api = createTRPCNextBeta<AppRouter>({
         (opts.direction === "down" && opts.result instanceof Error),
     }),
     httpBatchLink({
+      async headers() {
+        const authToken = await window.Clerk.session.getToken();
+        return {
+          Authorization: authToken ?? undefined,
+        };
+      },
       url: `${getBaseUrl()}/api/trpc`,
     }),
   ],
@@ -51,3 +57,9 @@ export const api = createTRPCNextBeta<AppRouter>({
 export const HydrateClient = createHydrateClient({
   transformer: superjson,
 });
+
+declare global {
+  interface Window {
+    Clerk: any;
+  }
+}
