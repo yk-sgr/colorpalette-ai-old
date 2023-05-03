@@ -3,7 +3,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { api } from "@/lib/api/server";
 import ClickCopy from "@/components/click-copy";
-import { Button } from "@/components/ui/buttons/Button";
 import Text from "@/components/ui/typography/Text";
 
 export default async function ColorDetailPage(props: {

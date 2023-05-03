@@ -24,6 +24,7 @@ export const createContextInner = (opts: CreateContextOptions) => {
 
 export const createContext = (opts: CreateNextContextOptions) => {
   const auth = getAuth(opts.req);
+  console.log("auth", auth);
   return createContextInner({
     auth,
     req: opts.req,
