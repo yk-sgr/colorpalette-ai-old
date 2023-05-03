@@ -52,6 +52,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
         href={props.href ?? ""}
         className={cn(linkButtonVariants({ variant, size, width, className }))}
         ref={ref}
+        prefetch={false}
         {...props}
       />
     );
