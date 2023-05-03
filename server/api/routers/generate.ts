@@ -178,8 +178,6 @@ export const generateRouter = createTRPCRouter({
         },
       });
     }
-
-    console.log(completion.data.choices[0]?.message);
   }),
 });
 
