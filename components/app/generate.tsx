@@ -16,6 +16,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import Text from '@/components/ui/typography/Text';
 import { X } from "lucide-react";
+import { DEFAULT_COLORS } from "@/server/api/routers/generate";
 
 export default function GenerateSection(props: React.ReactHTMLElement<HTMLElement>) {
   const ctx = api.useContext();
@@ -29,16 +30,7 @@ export default function GenerateSection(props: React.ReactHTMLElement<HTMLElemen
 
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [colors, setColors] = useState<string[]>([
-    "Primary",
-    "Secondary",
-    "Light Shade",
-    "Dark Shade",
-    "Background",
-    "Error",
-    "Warning",
-    "Success"
-  ]);
+  const [colors, setColors] = useState<string[]>(DEFAULT_COLORS);
   const [addColor, setAddColor] = useState<string>("");
   const [usages, setUsages] = useState<string[]>([]);
   const [palette, setPalette] = useState<string>("");

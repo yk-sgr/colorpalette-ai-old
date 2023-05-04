@@ -7,6 +7,9 @@ const publicPaths = [
   "/sign-up*",
   "/api/trpc*",
   "/api/stripe/webhook",
+  "/imprint",
+  "/privacy-policy",
+  "/tos"
 ];
 
 const isPublic = (reqPath: string) => {

@@ -1,9 +1,20 @@
-import {createTRPCRouter, protectedProcedure} from '@/server/api/trpc';
-import {z} from 'zod';
-import {Configuration, OpenAIApi} from 'openai';
+import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
+import { z } from 'zod';
+import { Configuration, OpenAIApi } from 'openai';
 import process from 'process';
-import {TRPCError} from '@trpc/server';
-import {GeneratePalette} from '@/lib/types';
+import { TRPCError } from '@trpc/server';
+import { GeneratePalette } from '@/lib/types';
+
+export const DEFAULT_COLORS = [
+  "Primary",
+  "Secondary",
+  "Light Shade",
+  "Dark Shade",
+  "Background",
+  "Error",
+  "Warning",
+  "Success"
+];
 
 const promptExample: GeneratePalette = {
   colors: [
@@ -51,7 +62,7 @@ const generatePaletteInput = z.object({
 const MAX_INVOCATIONS_FREE = 3;
 
 export const generateRouter = createTRPCRouter({
-  generatePalette: protectedProcedure.input(generatePaletteInput).mutation(async ({ctx, input}) => {
+  generatePalette: protectedProcedure.input(generatePaletteInput).mutation(async ({ ctx, input }) => {
     const user = await ctx.prisma.user.upsert({
       where: {
         id: ctx.auth.userId,
@@ -63,7 +74,7 @@ export const generateRouter = createTRPCRouter({
     });
 
     // Advanced Options / Paid Users
-    if ((input.colors.length > 0 || input.usages.length > 0 || input.palette !== "CUSTOM") && user.plan === "NONE") {
+    if ((input.colors != DEFAULT_COLORS || input.usages.length > 0 || input.palette !== "CUSTOM") && user.plan === "NONE") {
       throw new TRPCError({
         code: "FORBIDDEN",
         message: "Advanced options are only available to paid users.",
@@ -95,8 +106,8 @@ export const generateRouter = createTRPCRouter({
     const completion = await openai().createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
-        {role: "system", content: prompt},
-        {role: "user", content: gptInput},
+        { role: "system", content: prompt },
+        { role: "user", content: gptInput },
       ],
     });
 
