@@ -16,7 +16,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import Text from '@/components/ui/typography/Text';
 import { X } from "lucide-react";
-import { DEFAULT_COLORS } from "@/server/api/routers/generate";
+import { DEFAULT_COLORS } from "@/lib/utils";
 
 export default function GenerateSection(props: React.ReactHTMLElement<HTMLElement>) {
   const ctx = api.useContext();

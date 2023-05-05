@@ -4,17 +4,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import process from 'process';
 import { TRPCError } from '@trpc/server';
 import { GeneratePalette } from '@/lib/types';
-
-export const DEFAULT_COLORS = [
-  "Primary",
-  "Secondary",
-  "Light Shade",
-  "Dark Shade",
-  "Background",
-  "Error",
-  "Warning",
-  "Success"
-];
+import { DEFAULT_COLORS } from '@/lib/utils';
 
 const promptExample: GeneratePalette = {
   colors: [
