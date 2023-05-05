@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
-
+import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
 import { MainNav } from "./main-nav";
 import { Button } from "./ui/buttons/Button";
 
@@ -44,11 +43,16 @@ function StyledSignInButton() {
 
 function StyledSignOutButton() {
   const router = useRouter();
+  const { signOut } = useClerk();
+
+  async function handleSignOut() {
+    await signOut();
+    router.push("/");
+  }
+
   return (
-    <SignOutButton>
-      <Button variant={"outline"} onClick={() => router.push("/")}>
+      <Button variant={"outline"} onClick={() => handleSignOut()}>
         Sign Out
       </Button>
-    </SignOutButton>
   );
 }

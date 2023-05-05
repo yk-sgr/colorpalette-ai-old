@@ -96,7 +96,7 @@ function Pricing() {
             <div
               key={idx}
               className={`relative mt-6 flex flex-1 flex-col items-stretch rounded-lg border border-foreground/10 px-2 sm:mt-0 sm:max-w-md ${
-                item.isMostPop ? "bg-accent shadow-lg sm:border" : ""
+                item.isMostPop ? "bg-accent shadow-lg sm:border" : "bg-background"
               }`}
             >
               <div
