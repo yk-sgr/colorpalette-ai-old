@@ -45,7 +45,7 @@ export default function GenerateSection(props: React.ReactHTMLElement<HTMLElemen
         <div className="flex flex-col gap-4">
           <div>
             <Label htmlFor={"inputName"}>Palette Name</Label>
-            <Input id={"inputName"} className={"w-1/3"} placeholder={"Super Cool Palette"}
+            <Input id={"inputName"} className={"w-full md:w-1/2 xl:w-1/3"} placeholder={"Super Cool Palette"}
                    onChange={(event) => setName(event.target.value)}
             />
           </div>
