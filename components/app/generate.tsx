@@ -24,7 +24,7 @@ export default function GenerateSection(props: React.ReactHTMLElement<HTMLElemen
     api.generate.generatePalette.useMutation({
       retry: 0,
       onSuccess: async (data) => {
-        await ctx.palettes.invalidate();
+        await ctx.palettes.list.refetch();
       },
     });
 

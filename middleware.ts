@@ -9,7 +9,8 @@ const publicPaths = [
   "/api/stripe/webhook",
   "/imprint",
   "/privacy-policy",
-  "/tos"
+  "/tos",
+  "/favicon/site.webmanifest",
 ];
 
 const isPublic = (reqPath: string) => {

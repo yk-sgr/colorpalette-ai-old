@@ -42,7 +42,7 @@ model Palette {
   description String   @db.Text()
   name        String
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   colors      Color[]
 
@@ -57,7 +57,7 @@ model Color {
   description String       @db.Text()
   usages      ColorUsage[]
   paletteId   String
-  palette     Palette      @relation(fields: [paletteId], references: [id])
+  palette     Palette      @relation(fields: [paletteId], references: [id], onDelete: Cascade)
 
   @@index([paletteId])
   @@map("colors")
@@ -66,7 +66,7 @@ model Color {
 model ColorUsage {
   id        String   @id @default(cuid())
   colorId   String
-  color     Color    @relation(fields: [colorId], references: [id])
+  color     Color    @relation(fields: [colorId], references: [id], onDelete: Cascade)
   usage     String   @db.Text()
   createdAt DateTime @default(now())
 
