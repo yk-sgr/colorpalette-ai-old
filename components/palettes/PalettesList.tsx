@@ -11,7 +11,7 @@ type Props = {
 
 export default function PalettesList(props: Props) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {props.palettes.map((palette) => (
         <PaletteCard key={palette.id} {...palette} />
       ))}

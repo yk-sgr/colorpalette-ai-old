@@ -31,11 +31,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
         <head>
-          <script
-            defer
-            data-domain="colorpalette-ai.com"
-            src="https://analytics.colorpalette-ai.com/js/script.js"
-          ></script>
+          <script async src="https://analytics.umami.is/script.js" data-website-id="01093f26-7ce3-4a66-a2fc-d1b860f9fbbd"></script>
           <link
             rel="apple-touch-icon"
             sizes="180x180"
