@@ -1,14 +1,12 @@
 import PaletteCard from "./PaletteCard";
 
 type Props = {
-  palettes: [
-    {
-      id: string;
-      name: string;
-      description: string;
-      isFavorite: boolean;
-    }
-  ]
+  palettes: {
+    id: string;
+    name: string;
+    description: string;
+    isFavorite: boolean;
+  }[]
 }
 
 export default function PalettesList(props: Props) {
