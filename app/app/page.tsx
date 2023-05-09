@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { api } from "@/lib/api/server";
 import { Palette } from "@/lib/types";
 import {
@@ -8,9 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Heading2 from '@/components/ui/typography/Heading2';
 import LinkButton from '@/components/ui/buttons/LinkButton';
 import SectionHeader from '@/components/section-header';
+import { Heart } from "lucide-react";
+import Favorite from "@/components/app/Favorite";
+import PalettesList from "@/components/palettes/PalettesList";
 
 export default function IndexPage() {
   return (
@@ -31,25 +32,24 @@ async function Palettes() {
 
   return (
     <section className={"container mx-auto"}>
-      <div className={"grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"}>
-        {data &&
-          data.map((palette) => {
-            return <PaletteCard key={palette.id} palette={palette} />;
-          })}
-      </div>
+      <PalettesList palettes={data} />
     </section>
   );
 }
 
 function PaletteCard({ palette }: { palette: Palette }) {
   return (
-    <Link href={`/app/${palette.id}`} className={"h-max"}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{palette.name}</CardTitle>
-          <CardDescription>{palette.description}</CardDescription>
-        </CardHeader>
-      </Card>
-    </Link>
+    <Card>
+      <CardHeader>
+        <div className="flex justify-between">
+          <Link href={`/app/${palette.id}`} className={"h-max"}>
+            <CardTitle>{palette.name}</CardTitle>
+          </Link>
+          <Favorite id={palette.id} isFavorite={palette.isFavorite} />
+        </div>
+        <CardDescription>{palette.description}</CardDescription>
+      </CardHeader>
+    </Card>
   );
 }
+

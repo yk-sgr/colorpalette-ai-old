@@ -13,6 +13,7 @@ export type Palette = {
   id: string;
   description: string;
   name: string;
+  isFavorite: boolean;
   colors: Color[];
 };
 

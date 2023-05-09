@@ -54,23 +54,20 @@ function Pricing() {
   const plans = [
     {
       name: "Pro",
-      desc: "Generate colors like a pro.",
+      desc: "For those who want to get the most out of ColorPaletteAI.",
       buttonLabel: "Upgrade to Pro",
       price: 2.99,
       isMostPop: true,
       features: [
         "Unlimited color generations",
         "Advanced generation options",
-        "Palette History",
-        "* Regenerate colors",
-        "* Edit palettes and colors",
       ],
       redirect: "/api/stripe/create-checkout-session",
     },
     {
       name: "Free",
       desc: "Free for testing out ColorPaletteAI.",
-      buttonLabel: "Continue as Free",
+      buttonLabel: "Start for Free",
       price: 0,
       isMostPop: false,
       features: ["3 color generations"],
@@ -79,9 +76,9 @@ function Pricing() {
   ];
 
   return (
-    <section className="relative py-14">
-      <div className="absolute top-0 h-[521px] w-full bg-gradient-to-b from-primary/10 to-background"></div>
-      <div className="mx-auto max-w-screen-xl sm:px-4 md:px-8">
+    <section className="relative py-10">
+      <div className="absolute h-[45rem] w-full bg-gradient-to-b from-primary/10 to-background"></div>
+      <div className="mx-auto max-w-screen-xl py-10 sm:px-4 md:px-8">
         <div className="container mx-auto max-w-xl space-y-3 sm:px-0 sm:text-center">
           <Heading2>Pricing</Heading2>
           <div className="max-w-xl text-muted-foreground">

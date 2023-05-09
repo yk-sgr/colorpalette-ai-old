@@ -4,7 +4,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const textVariants = cva(
-  "text-foreground/75 transition ease-out duration-100",
+  "text-foreground/80 transition ease-out duration-100",
   {
     variants: {
       weight: {
