@@ -1,10 +1,11 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
+  beforeAuth: (req) => {
+    console.log(req.url)
+  },
   publicRoutes: [
     "/",
-    "/sign-in(.*)",
-    "/sign-up(.*)",
     "/api/stripe/webhook",
     "/imprint",
     "/privacy-policy",
@@ -15,5 +16,5 @@ export default authMiddleware({
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/"],
+  matcher: '/((?!_next/image|_next/static|favicon.ico).*)',
 };
