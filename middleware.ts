@@ -5,7 +5,6 @@ export default authMiddleware({
     "/",
     "/sign-in(.*)",
     "/sign-up(.*)",
-    "/api/trpc(.*)",
     "/api/stripe/webhook",
     "/imprint",
     "/privacy-policy",
