@@ -90,6 +90,7 @@ export default function GenerateSection(props: React.ReactHTMLElement<HTMLElemen
             </CollapsibleContent>
           </Collapsible>
           <Button
+            data-umami-event="Create Palette Button Clicked"
             className={`w-full whitespace-nowrap md:w-fit ${
               isLoading ? "cursor-not-allowed" : "cursor-pointer"
             }`}

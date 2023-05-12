@@ -35,7 +35,7 @@ export function SiteHeader() {
 
 function StyledSignInButton() {
   return (
-    <Link href={"/sign-in"}>
+    <Link href={"https://accounts.colorpalette-ai.com/sign-in"}>
       <Button variant={"default"}>Sign In</Button>
     </Link>
   );
