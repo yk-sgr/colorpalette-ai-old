@@ -1,9 +1,6 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  beforeAuth: (req) => {
-    console.log(req.url)
-  },
   publicRoutes: [
     "/",
     "/api/stripe/webhook",
@@ -12,7 +9,6 @@ export default authMiddleware({
     "/tos",
     "/favicon/site.webmanifest",
   ],
-  debug: true,
 });
 
 export const config = {

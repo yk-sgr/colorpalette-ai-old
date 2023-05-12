@@ -11,19 +11,19 @@ import Text from "@/components/ui/typography/Text";
 export function MainNav() {
   return (
     <nav className="flex items-center gap-6 md:gap-10">
-      <span className="flex items-center gap-2 font-bold">
-        <span className="h-6 w-6">
-          <Link href="/">
+      <Link href="/">
+        <span className="flex items-center gap-2 font-bold">
+          <span className="h-6 w-6">
             <Image
               src={Logo}
               alt={"ColorPaletteAI Logo"}
               height={32}
               width={32}
             />
-          </Link>
+          </span>
+          <span>{siteConfig.name} <span className={"text-xs"}>BETA</span></span>
         </span>
-        <span>{siteConfig.name} <span className={"text-xs"}>BETA</span></span>
-      </span>
+      </Link>
     </nav>
   );
 }
